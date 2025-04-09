@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/Alexiakane/donjonChaton#readme",
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2",
     "pg": "^8.14.1",
     "postgres": "^3.4.5"
   }
