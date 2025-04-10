@@ -1,11 +1,10 @@
 export class CharacterFull {
-    constructor(id, name, heartPoints, friendshipPoints, childhood, gift, trait, user, story, portrait, xp) {
+    constructor(id, name, heartPoints, friendshipPoints, childhood, trait, user, story, portrait, xp) {
         this.id = id;
         this.name = name;
         this.heartPoints = heartPoints;
         this.friendshipPoints = friendshipPoints;
         this.childhood = childhood;
-        this.gift = gift;
         this.trait = trait;
         this.user = user;
         this.story = story;

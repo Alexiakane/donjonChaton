@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "vitest"
+    "test": "vitest",
+    "create_database": "node ./projetEcf/Backend/config/createDatabase.js",
+    "init_database": "node ./projetEcf/Backend/config/initDatabase.js",
+    "start": "node ./projetEcf/Backend/src/server.js"
   },
   "repository": {
     "type": "git",

@@ -12,8 +12,8 @@ export const talentService = {
         return await talentRepository.get(id);
     },
 
-    async getEquipmentsByCharacterId(characterId) {
-        return await talentRepository.getEquipmentsByCharacterId(characterId);
+    async getByCharacterId(characterId) {
+        return await talentRepository.getByCharacterId(characterId);
     },
 
     async create(talentData) {

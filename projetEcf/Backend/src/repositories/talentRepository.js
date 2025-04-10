@@ -1,5 +1,6 @@
 import db from '../../config/database.js';
 import { Talent } from '../models/Talent.js';
+import { CharacterFullTalent } from '../models/CharacterFullTalent.js';
 import { logError } from '../utils/logger.js';
 
 async function dbQuery(query, params = []) {

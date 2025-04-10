@@ -16,7 +16,9 @@ export const childhoodService = {
         let newChildhood = new Childhood(
             null,
             childhoodData.name,
-            childhoodData.description
+            childhoodData.description,
+            childhoodData.gift,
+            childhoodData.giftDescription
         );
 
         const validation = newChildhood.estValide();
@@ -31,7 +33,9 @@ export const childhoodService = {
         const childhood = new Childhood(
             null,
             childhoodData.name,
-            childhoodData.description
+            childhoodData.description,
+            childhoodData.gift,
+            childhoodData.giftDescription
         );
         return await childhoodRepository.update(id, childhood);
     },

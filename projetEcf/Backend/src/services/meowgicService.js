@@ -11,8 +11,8 @@ export const meowgicService = {
         return await meowgicRepository.get(id);
     },
 
-    async getEquipmentsByCharacterId(characterId) {
-        return await meowgicRepository.getEquipmentsByCharacterId(characterId);
+    async getByCharacterId(characterId) {
+        return await meowgicRepository.getByCharacterId(characterId);
     },
 
     async create(meowgicData) {

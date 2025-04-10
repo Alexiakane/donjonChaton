@@ -12,8 +12,8 @@ export const equipmentService = {
         return await equipmentRepository.get(id);
     },
     
-    async getEquipmentsByCharacterId(characterId) {
-        return await equipmentRepository.getEquipmentsByCharacterId(characterId);
+    async getByCharacterId(characterId) {
+        return await equipmentRepository.getByCharacterId(characterId);
     },
     
     async create(equipmentData) {

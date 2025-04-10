@@ -1,5 +1,6 @@
 import db from '../../config/database.js';
 import { Equipment } from '../models/Equipment.js';
+import { CharacterFullEquipment } from '../models/CharacterFullEquipment.js';
 import { logError } from '../utils/logger.js';
 
 async function dbQuery(query, params = []) {
@@ -39,6 +40,17 @@ export const equipmentRepository = {
         } else {
             return null;
         }
+    },
+
+    async getByCharacterId(characterId) {
+        const query = 'SELECT e.* FROM "Character_Equipment" ce'
+            + ' INNER JOIN "Equipment" e ON ce.ID_Equipment = e.ID_Equipment'
+            + ' WHERE ce.ID_Character = $1';
+        const result = await dbQuery(query, [characterId]);
+        return result.rows.map(row => new CharacterFullEquipment(
+            row.id_equipment,
+            row.name
+        ));
     },
 
     async create(equipment) {

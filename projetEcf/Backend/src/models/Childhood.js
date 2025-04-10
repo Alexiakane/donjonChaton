@@ -1,8 +1,10 @@
 export class Childhood {
-    constructor(id, name, description) {
+    constructor(id, name, description, gift, giftDescription) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.gift = gift;
+        this.giftDescription = giftDescription;
     }
 
     // Validation

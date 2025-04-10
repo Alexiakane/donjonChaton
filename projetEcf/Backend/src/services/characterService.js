@@ -18,13 +18,13 @@ export const characterService = {
         const characterQualities = await characterQualityService.getByCharacterId(id);
         characterFull.qualities = characterQualities;
         //appel pour lister les equipements
-        const characterEquipments = await equipmentService.getEquipmentsByCharacterId(id);
+        const characterEquipments = await equipmentService.getByCharacterId(id);
         characterFull.equipments = characterEquipments;
         //appel pour lister les meowgics
-        const characterMeowgics = await meowgicService.getMeowgicsByCharacterId(id);
+        const characterMeowgics = await meowgicService.getByCharacterId(id);
         characterFull.meowgics = characterMeowgics;
         //appel pour lister les talents
-        const characterTalents = await talentService.getTalentsByCharacterId(id);
+        const characterTalents = await talentService.getByCharacterId(id);
         characterFull.talents = characterTalents;
 
         return characterFull;

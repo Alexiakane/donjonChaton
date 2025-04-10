@@ -1,5 +1,6 @@
 import db from '../../config/database.js';
 import { Meowgic } from '../models/Meowgic.js';
+import { CharacterFullMeowgic } from '../models/CharacterFullMeowgic.js';
 import { logError } from '../utils/logger.js';
 
 async function dbQuery(query, params = []) {
@@ -39,6 +40,17 @@ export const meowgicRepository = {
         } else {
             return null;
         }
+    },
+
+    async getByCharacterId(characterId) {
+        const query = 'SELECT m.* FROM "Character_Meowgic" cm'
+        + ' INNER JOIN "Meowgic" m ON cm.ID_Meowgic = m.ID_Meowgic'
+        + ' WHERE cm.ID_Character = $1';
+        const result = await dbQuery(query, [characterId]);
+        return result.rows.map(row => new CharacterFullMeowgic(
+            row.id_meowgic,
+            row.name
+        ));
     },
 
     async create(meowgic) {

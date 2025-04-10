@@ -1,11 +1,10 @@
 export class Character {
-    constructor(id, name, heartPoints, friendshipPoints, idChildhood, idGift, idTrait, idUser, story, portrait, xp) {
+    constructor(id, name, heartPoints, friendshipPoints, idChildhood, idTrait, idUser, story, portrait, xp) {
         this.id = id;
         this.name = name;
         this.heartPoints = heartPoints;
         this.friendshipPoints = friendshipPoints;
         this.idChildhood = idChildhood;
-        this.idGift = idGift;
         this.idTrait = idTrait;
         this.idUser = idUser;
         this.story = story;
@@ -20,9 +19,6 @@ export class Character {
         }
         if (!this.idChildhood) {
             return { valide: false, erreur: 'L\'enfance est requise' };
-        }
-        if (!this.idGift) {
-            return { valide: false, erreur: 'Le don est requis' };
         }
         if (!this.idTrait) {
             return { valide: false, erreur: 'Le trait est requis' };

@@ -37,8 +37,8 @@ export const characterRepository = {
 
     async getFull(id) {
         const query = 'SELECT cha.*,'
-        + ' chi.name as chiname,'
-        + ' t.name as traitname'
+        + ' chi.name as chiname, chi.description as chidescr, chi.gift as chigift, chi.gift_description as chigiftdesc,'
+        + ' t.name as traitname, t.description as traitdescr'
         + ' FROM "Character" cha'
         + ' INNER JOIN "Childhood" chi ON chi.ID_Childhood = cha.ID_Childhood'
         + ' INNER JOIN "Trait" t ON t.ID_Trait = cha.ID_Trait'
@@ -46,8 +46,8 @@ export const characterRepository = {
         const results = await dbQuery(query, [id]);
         if (results.rows.length > 0) {
             const row = results.rows[0];
-            const childhood = new Childhood(row.ID_Childhood, row.chiname);
-            const trait = new Trait(row.ID_Trait, row.traitname);
+            const childhood = new Childhood(row.id_childhood, row.chiname, row.chidescr, row.chigift, row.chigiftdesc);
+            const trait = new Trait(row.id_trait, row.traitname, row.traitdescr);
             return new CharacterFull(
                 row.id_character,
                 row.name,
@@ -88,7 +88,7 @@ export const characterRepository = {
     },
 
     async create(character) {
-        const query = `INSERT INTO "Character" (Name, Heart_Points, Friendship_Points, ID_Childhood, ID_Gift, ID_Trait, ID_User, Story, Portrait, Xp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING ID_Character`;
+        const query = `INSERT INTO "Character" (Name, Heart_Points, Friendship_Points, ID_Childhood, ID_Trait, ID_User, Story, Portrait, Xp) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING ID_Character`;
         const params = [
             character.name,
             character.heartPoints,
@@ -105,7 +105,7 @@ export const characterRepository = {
     },
 
     async update(id, character) {
-        const query = `UPDATE Character SET Name = $1, Heart_Points = $2, Friendship_Points = $3, ID_Childhood = $4, ID_Gift = $5, ID_Trait = $6, ID_User = $7, Story = $8, Portrait = $9, Xp = $10 WHERE ID_Character = $11 RETURNING ID_Character`;
+        const query = `UPDATE Character SET Name = $1, Heart_Points = $2, Friendship_Points = $3, ID_Childhood = $4, ID_Trait = $5, ID_User = $6, Story = $7, Portrait = $8, Xp = $9 WHERE ID_Character = $10 RETURNING ID_Character`;
         const params = [
             character.name,
             character.heartPoints,
