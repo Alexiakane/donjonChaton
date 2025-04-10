@@ -28,12 +28,7 @@ export const qualityService = {
     },
 
     async update(id, qualityData) {
-        const quality = new Quality(
-            null,
-            qualityData.name,
-            qualityData.description
-        );
-        return await qualityRepository.update(id, quality);
+        return await qualityRepository.update(id, qualityData);
     },
 
     async delete(id) {

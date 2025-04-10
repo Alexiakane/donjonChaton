@@ -5,7 +5,7 @@ export const qualityRoutes = async (req, res) => {
     const url = req.url;
     const method = req.method;
 
-    if (url === '/quality' && method === 'GET') {
+    if (url === '/qualities' && method === 'GET') {
         await qualityController.getAllQuality(req, res);
         return true;
     } else if (url.startsWith('/quality/') && method === 'GET') {

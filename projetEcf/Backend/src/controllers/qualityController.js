@@ -9,7 +9,7 @@ export const qualityController = {
         try {
             const qualities = await qualityService.getAll();
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: qualities }));
+            res.end(JSON.stringify({ success: true, qualities: qualities }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -22,7 +22,7 @@ export const qualityController = {
             const quality = await qualityService.get(id);
             if (quality) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: quality }));
+                res.end(JSON.stringify({ success: true, quality: quality }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Qualité non trouvée' }));
@@ -39,7 +39,7 @@ export const qualityController = {
             const body = await parseRequestBody(req);
             const quality = await qualityService.create(body);
             res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: quality }));
+            res.end(JSON.stringify({ success: true, quality: quality }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -53,7 +53,7 @@ export const qualityController = {
             const quality = await qualityService.update(id, body);
             if (quality) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: quality }));
+                res.end(JSON.stringify({ success: true, quality: quality }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Qualité non trouvée' }));

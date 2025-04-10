@@ -5,7 +5,7 @@ export const meowgicRoutes = async (req, res) => {
     const url = req.url;
     const method = req.method;
 
-    if (url === '/meowgic' && method === 'GET') {
+    if (url === '/meowgics' && method === 'GET') {
         await meowgicController.getAllMeowgics(req, res);
         return true;
     } else if (url.startsWith('/meowgic/') && method === 'GET') {

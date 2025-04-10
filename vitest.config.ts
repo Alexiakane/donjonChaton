@@ -4,7 +4,8 @@ export default defineConfig({
   test: {
     coverage: {
       provider: 'v8',
-      reporter: ['text', 'json', 'html']
+      reporter: ['text', 'json', 'html'],
+      reportsDirectory: './projetEcf/Backend/coverage'
     },
   },
 })

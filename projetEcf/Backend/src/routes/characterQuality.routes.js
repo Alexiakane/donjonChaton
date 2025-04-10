@@ -6,29 +6,29 @@ export const characterQualityRoutes = async (req, res) => {
     const method = req.method;
 
     if (url === '/characterQualities' && method === 'GET') {
-        await characterQualityController.getAllCharacterQualities(res);
+        await characterQualityController.getAllCharacterQualities(req, res);
         return true;
     } else if (url.startsWith('/characterQualities/character/') && method === 'GET') {
         const idcharacter = url.split('/')[3];
-        await characterQualityController.getCharacterQualitiesByCharacterId(res, idcharacter);
+        await characterQualityController.getCharacterQualitiesByCharacterId(req, res, idcharacter);
         return true;
-    } else if (url.startsWith('/characterQualities/') && method === 'GET') {
+    } else if (url.startsWith('/characterQuality/') && method === 'GET') {
         const idcharacter = url.split('/')[2];
         const idquality = url.split('/')[3];
-        await characterQualityController.getCharacterQualityById(res, idcharacter, idquality);
+        await characterQualityController.getCharacterQualityById(req, res, idcharacter, idquality);
         return true;
-    } else if (url === '/characterQualities' && method === 'POST') {
+    } else if (url === '/characterQuality' && method === 'POST') {
         await characterQualityController.createCharacterQuality(req, res);
         return true;
-    } else if (url.startsWith('/characterQualities/') && method === 'PUT') {
+    } else if (url.startsWith('/characterQuality/') && method === 'PUT') {
         const idcharacter = url.split('/')[2];
         const idquality = url.split('/')[3];
         await characterQualityController.updateCharacterQuality(req, res, idcharacter, idquality);
         return true;
-    } else if (url.startsWith('/characterQualities/') && method === 'DELETE') {
+    } else if (url.startsWith('/characterQuality/') && method === 'DELETE') {
         const idcharacter = url.split('/')[2];
         const idquality = url.split('/')[3];
-        await characterQualityController.deleteCharacterQuality(res, idcharacter, idquality);
+        await characterQualityController.deleteCharacterQuality(req, res, idcharacter, idquality);
         return true;
     }
 };

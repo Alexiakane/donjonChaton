@@ -1,4 +1,4 @@
-import { equipmentService } from '../services/equipmentservice.js';
+import { equipmentService } from '../services/equipmentService.js';
 import { parseRequestBody } from '../utils/httpHelper.js';
 import { logError } from '../utils/logger.js';
 
@@ -9,7 +9,7 @@ export const equipmentController = {
         try {
             const equipments = await equipmentService.getAll();
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: equipments }));
+            res.end(JSON.stringify({ success: true, equipments: equipments }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -22,7 +22,7 @@ export const equipmentController = {
             const equipment = await equipmentService.get(id);
             if (equipment) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: equipment }));
+                res.end(JSON.stringify({ success: true, equipment: equipment }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Equipement non trouvé' }));
@@ -39,7 +39,7 @@ export const equipmentController = {
             const body = await parseRequestBody(req);
             const equipment = await equipmentService.create(body);
             res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: equipment }));
+            res.end(JSON.stringify({ success: true, equipment: equipment }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -53,7 +53,7 @@ export const equipmentController = {
             const equipment = await equipmentService.update(id, body);
             if (equipment) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: equipment }));
+                res.end(JSON.stringify({ success: true, equipment: equipment }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Equipement non trouvé' }));

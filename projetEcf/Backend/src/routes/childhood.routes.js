@@ -5,7 +5,7 @@ export const childhoodRoutes = async (req, res) => {
     const url = req.url;
     const method = req.method;
 
-    if (url === '/childhood' && method === 'GET') {
+    if (url === '/childhoods' && method === 'GET') {
         await childhoodController.getAllChildhoods(req, res);
         return true;
     } else if (url.startsWith('/childhood/') && method === 'GET') {

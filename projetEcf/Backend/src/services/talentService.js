@@ -32,12 +32,7 @@ export const talentService = {
     },
 
     async update(id, talentData) {
-        const talent = new Talent(
-            null,
-            talentData.name,
-            talentData.description
-        );
-        return await talentRepository.update(id, talent);
+        return await talentRepository.update(id, talentData);
     },
 
     async delete(id) {

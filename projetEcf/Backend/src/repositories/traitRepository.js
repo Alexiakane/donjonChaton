@@ -49,7 +49,7 @@ export const traitRepository = {
     },
 
     async update(id, trait) {
-        const query = `UPDATE "Trait" SET Name = $1, Description = $2 WHERE ID_Trait = $3 RETURNING ID_Trait`;
+        const query = `UPDATE "Trait" SET Name = $1, Description = $2 WHERE ID_Trait = $3 RETURNING *`;
         const params = [trait.name, trait.description, id];
         const result = await dbQuery(query, params);
         return result.rows[0];

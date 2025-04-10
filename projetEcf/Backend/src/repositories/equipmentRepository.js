@@ -1,6 +1,5 @@
 import db from '../../config/database.js';
 import { Equipment } from '../models/Equipment.js';
-import { CharacterFullEquipment } from '../models/CharacterFullEquipment.js';
 import { logError } from '../utils/logger.js';
 
 async function dbQuery(query, params = []) {
@@ -47,9 +46,10 @@ export const equipmentRepository = {
             + ' INNER JOIN "Equipment" e ON ce.ID_Equipment = e.ID_Equipment'
             + ' WHERE ce.ID_Character = $1';
         const result = await dbQuery(query, [characterId]);
-        return result.rows.map(row => new CharacterFullEquipment(
+        return result.rows.map(row => new Equipment(
             row.id_equipment,
-            row.name
+            row.name,
+            row.description
         ));
     },
 
@@ -61,7 +61,7 @@ export const equipmentRepository = {
     },
 
     async update(id, equipment) {
-        const query = `UPDATE "Equipment" SET Name = $1, Description = $2 WHERE ID_Equipment = $3 RETURNING ID_Equipment`;
+        const query = `UPDATE "Equipment" SET Name = $1, Description = $2 WHERE ID_Equipment = $3 RETURNING *`;
         const params = [equipment.name, equipment.description, id];
         const result = await dbQuery(query, params);
         return result.rows[0];

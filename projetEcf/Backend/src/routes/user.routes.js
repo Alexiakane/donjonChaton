@@ -5,57 +5,44 @@ export const userRoutes = async (req, res) => {
     const url = req.url;
     const method = req.method;
 
-    if (url === '/users/login' && method === 'POST') {
+    if (url === '/user/login' && method === 'POST') {
         await userController.login(req, res);
         return true;
-    } else if (url === '/users/register' && method === 'POST') {
+    } else if (url === '/user/register' && method === 'POST') {
         await userController.register(req, res);
         return true;
-    } else if (url === '/users/logout' && method === 'POST') {
+    } else if (url === '/user/logout' && method === 'POST') {
         await userController.logout(req, res);
         return true;
-    } else if (url === '/users/refresh' && method === 'POST') {
+    } else if (url === '/user/refresh' && method === 'POST') {
         await userController.refresh(req, res);
         return true;
-    } else if (url.startsWith('/users/username/') && method === 'GET') {
+    } else if (url.startsWith('/user/username/') && method === 'GET') {
         const username = url.split('/')[3];
         await userController.findByUsername(req, res, username);
         return true;
-    } else if (url.startsWith('/users/email/') && method === 'GET') {
+    } else if (url.startsWith('/user/email/') && method === 'GET') {
         const email = url.split('/')[3]; 
         await userController.findByEmail(req, res, email);
         return true;
     } else if (url === '/users' && method === 'GET') {
         await userController.getAllUsers(req, res);
         return true;
-    } else if (url.startsWith('/users/') && method === 'GET') {
+    } else if (url.startsWith('/user/') && method === 'GET') {
         const id = url.split('/')[2];
         await userController.getUserById(req, res, id);
         return true;
-    } else if (url === '/users' && method === 'POST') {
+    } else if (url === '/user' && method === 'POST') {
         await userController.createUser(req, res);
         return true;
-    } else if (url.startsWith('/users/') && method === 'PUT') {
+    } else if (url.startsWith('/user/') && method === 'PUT') {
         const id = url.split('/')[2];
         await userController.updateUser(req, res, id);
         return true;
-    } else if (url.startsWith('/users/') && method === 'DELETE') {
+    } else if (url.startsWith('/user/') && method === 'DELETE') {
         const id = url.split('/')[2];
         await userController.deleteUser(req, res, id);
         return true;
     }
     
 };
-
-/*
-server.on('request', async (req, res) => {
-    if (req.url === '/profile' && req.method === 'GET') {
-        const authedReq = await authMiddleware(req, res);
-        if (!authedReq) return; 
-  
-        const user = authedReq.user;
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ message: 'Hello, ' + user.username }));
-    }
-});
-*/

@@ -19,7 +19,9 @@ export const meowgicService = {
         let newMeowgic = new Meowgic(
             null,
             meowgicData.name,
-            meowgicData.description
+            meowgicData.type,
+            meowgicData.description,
+            meowgicData.difficulty,
         );
 
         const validation = newMeowgic.estValide();
@@ -31,12 +33,7 @@ export const meowgicService = {
     },
 
     async update(id, meowgicData) {
-        const meowgic = new Meowgic(
-            null,
-            meowgicData.name,
-            meowgicData.description
-        );
-        return await meowgicRepository.update(id, meowgic);
+        return await meowgicRepository.update(id, meowgicData);
     },
 
     async delete(id) {

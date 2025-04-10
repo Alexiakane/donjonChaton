@@ -11,7 +11,7 @@ export const userController = {
             const user = await userService.login(body.email, body.password);
             if (user) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: user }));
+                res.end(JSON.stringify({ success: true, user: user }));
             } else {
                 res.writeHead(401, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Utilisateur non trouvé' }));
@@ -29,7 +29,7 @@ export const userController = {
             const user = await userService.register(body.fullname, body.email, body.password, body.username);
             if (user) {
                 res.writeHead(201, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: user }));
+                res.end(JSON.stringify({ success: true, user: user }));
             } else {
                 res.writeHead(400, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Erreur lors de l\'inscription' }));
@@ -87,7 +87,7 @@ export const userController = {
         try {
             const users = await userService.getAll();
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: users }));
+            res.end(JSON.stringify({ success: true, users: users }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -100,7 +100,7 @@ export const userController = {
             const user = await userService.get(id);
             if (user) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: user }));
+                res.end(JSON.stringify({ success: true, user: user }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Utilisateur non trouvé' }));
@@ -117,7 +117,7 @@ export const userController = {
             const body = await parseRequestBody(req);
             const user = await userService.create(body);
             res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: user }));
+            res.end(JSON.stringify({ success: true, user: user }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -131,7 +131,7 @@ export const userController = {
             const user = await userService.update(id, body);
             if (user) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: user }));
+                res.end(JSON.stringify({ success: true, user: user }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Utilisateur non trouvé' }));
@@ -166,7 +166,7 @@ export const userController = {
             const user = await userService.findByUsername(body.username);
             if (user) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: user }));
+                res.end(JSON.stringify({ success: true, user: user }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Utilisateur non trouvé' }));
@@ -184,7 +184,7 @@ export const userController = {
             const user = await userService.findByEmail(body.email);
             if (user) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: user }));
+                res.end(JSON.stringify({ success: true, user: user }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Utilisateur non trouvé' }));

@@ -8,18 +8,18 @@ export const traitRoutes = async (req, res) => {
     if (url === '/traits' && method === 'GET') {
         await traitController.getAllTraits(req, res);
         return true;
-    } else if (url.startsWith('/traits/') && method === 'GET') {
+    } else if (url.startsWith('/trait/') && method === 'GET') {
         const id = url.split('/')[2];
         await traitController.getTraitById(req, res, id);
         return true;
-    } else if (url === '/traits' && method === 'POST') {
+    } else if (url === '/trait' && method === 'POST') {
         await traitController.createTrait(req, res);
         return true;
-    } else if (url.startsWith('/traits/') && method === 'PUT') {
+    } else if (url.startsWith('/trait/') && method === 'PUT') {
         const id = url.split('/')[2];
         await traitController.updateTrait(req, res, id);
         return true;
-    } else if (url.startsWith('/traits/') && method === 'DELETE') {
+    } else if (url.startsWith('/trait/') && method === 'DELETE') {
         const id = url.split('/')[2];
         await traitController.deleteTrait(req, res, id);
         return true;

@@ -9,7 +9,7 @@ export const roleController = {
         try {
             const roles = await roleService.getAll();
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: roles }));
+            res.end(JSON.stringify({ success: true, roles: roles }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -22,7 +22,7 @@ export const roleController = {
             const role = await roleService.get(id);
             if (role) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: role }));
+                res.end(JSON.stringify({ success: true, role: role }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Rôle non trouvé' }));
@@ -39,7 +39,7 @@ export const roleController = {
             const body = await parseRequestBody(req);
             const role = await roleService.create(body);
             res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: role }));
+            res.end(JSON.stringify({ success: true, role: role }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -53,7 +53,7 @@ export const roleController = {
             const role = await roleService.update(id, body);
             if (role) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: role }));
+                res.end(JSON.stringify({ success: true, role: role }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Rôle non trouvé' }));

@@ -9,7 +9,7 @@ export const talentController = {
         try {
             const talents = await talentService.getAll();
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: talents }));
+            res.end(JSON.stringify({ success: true, talents: talents }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -22,7 +22,7 @@ export const talentController = {
             const talent = await talentService.get(id);
             if (talent) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: talent }));
+                res.end(JSON.stringify({ success: true, talent: talent }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Talent non trouvé' }));
@@ -39,7 +39,7 @@ export const talentController = {
             const body = await parseRequestBody(req);
             const talent = await talentService.create(body);
             res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: talent }));
+            res.end(JSON.stringify({ success: true, talent: talent }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -53,7 +53,7 @@ export const talentController = {
             const talent = await talentService.update(id, body);
             if (talent) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: talent }));
+                res.end(JSON.stringify({ success: true, talent: talent }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Talent non trouvé' }));

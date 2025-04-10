@@ -9,7 +9,7 @@ export const traitController = {
         try {
             const traits = await traitService.getAll();
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: traits }));
+            res.end(JSON.stringify({ success: true, traits: traits }));
         }
         catch (error) {
             logError(error);
@@ -23,7 +23,7 @@ export const traitController = {
             const trait = await traitService.get(id);
             if (trait) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: trait }));
+                res.end(JSON.stringify({ success: true, trait: trait }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Trait non trouvé' }));
@@ -40,7 +40,7 @@ export const traitController = {
             const body = await parseRequestBody(req);
             const trait = await traitService.create(body);
             res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: trait }));
+            res.end(JSON.stringify({ success: true, trait: trait }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -54,7 +54,7 @@ export const traitController = {
             const trait = await traitService.update(id, body);
             if (trait) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: trait }));
+                res.end(JSON.stringify({ success: true, trait: trait }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Trait non trouvé' }));
@@ -70,8 +70,8 @@ export const traitController = {
         try {
             const result = await traitService.delete(id);
             if (result === 1) {
-                res.writeHead(204, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true }));
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, message: 'Trait supprimé avec succès' }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Trait non trouvé' }));

@@ -8,22 +8,22 @@ export const characterRoutes = async (req, res) => {
     if (url === '/characters' && method === 'GET') {
         await characterController.getAllCharacters(req, res);
         return true;
-    } else if (url.startsWith('/characters/full/') && method === 'GET') {
+    } else if (url.startsWith('/character/full/') && method === 'GET') {
         const id = url.split('/')[3];
         await characterController.getCharacterFullById(req, res, id);
         return true;
-    } else if (url.startsWith('/characters/') && method === 'GET') {
+    } else if (url.startsWith('/character/') && method === 'GET') {
         const id = url.split('/')[2];
         await characterController.getCharacterById(req, res, id);
         return true;
-    } else if (url === '/characters' && method === 'POST') {
+    } else if (url === '/character' && method === 'POST') {
         await characterController.createCharacter(req, res);
         return true;
-    } else if (url.startsWith('/characters/') && method === 'PUT') {
+    } else if (url.startsWith('/character/') && method === 'PUT') {
         const id = url.split('/')[2];
         await characterController.updateCharacter(req, res, id);
         return true;
-    } else if (url.startsWith('/characters/') && method === 'DELETE') {
+    } else if (url.startsWith('/character/') && method === 'DELETE') {
         const id = url.split('/')[2];
         await characterController.deleteCharacter(req, res, id);
         return true;

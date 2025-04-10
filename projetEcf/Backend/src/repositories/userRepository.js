@@ -28,7 +28,7 @@ export const userRepository = {
             row.password,
             row.email,
             row.avatar,
-            row.role_id
+            row.id_role
         ));
     },
 
@@ -44,7 +44,7 @@ export const userRepository = {
                 row.email,
                 row.password,
                 row.avatar,
-                row.role_id
+                row.id_role
             );
         } else {
             return null;
@@ -59,9 +59,8 @@ export const userRepository = {
     },
 
     async update(id, user) {
-        const query = `UPDATE "User" SET Username = $1, Password = $2, Email = $3, ID_Role = $4 WHERE ID_User = $5 RETURNING ID_User`;
-        const hashedPassword = await hashPassword(user.password);
-        const params = [user.fullname, user.username, hashedPassword, user.email, user.idRole, id];
+        const query = `UPDATE "User" SET Username = $1, Password = $2, Email = $3, ID_Role = $4 WHERE ID_User = $5 RETURNING *`;
+        const params = [user.fullname, user.username, user.password, user.email, user.idRole, id];
         const result = await dbQuery(query, params);
         return result.rows[0];
     },
@@ -88,7 +87,7 @@ export const userRepository = {
                 row.email,
                 row.password,
                 row.avatar,
-                row.role_id
+                row.id_role
             );
         } else {
             return null;
@@ -107,14 +106,10 @@ export const userRepository = {
                 row.email,
                 row.password,
                 row.avatar,
-                row.role_id
+                row.id_role
             );
         } else {
             return null;
         }
-    },
-    async hashPassword(password) {
-        const salt = await bcrypt.genSalt(10);
-        return await bcrypt.hash(password, salt);
     }
 };

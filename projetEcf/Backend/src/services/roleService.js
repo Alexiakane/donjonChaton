@@ -28,12 +28,7 @@ export const roleService = {
     },
 
     async update(id, roleData) {
-        const role = new Role(
-            null,
-            roleData.name,
-            roleData.description
-        );
-        return await roleRepository.update(id, role);
+        return await roleRepository.update(id, roleData);
     },
 
     async delete(id) {

@@ -48,7 +48,7 @@ export const qualityRepository = {
     },
 
     async update(id, quality) {
-        const query = `UPDATE "Quality" SET Name = $1, Description = $2 WHERE ID_Quality = $3 RETURNING ID_Quality`;
+        const query = `UPDATE "Quality" SET Name = $1, Description = $2 WHERE ID_Quality = $3 RETURNING *`;
         const params = [quality.name, quality.description, id];
         const result = await dbQuery(query, params);
         return result.rows[0];

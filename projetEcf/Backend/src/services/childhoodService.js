@@ -30,14 +30,7 @@ export const childhoodService = {
     },
 
     async update(id, childhoodData) {
-        const childhood = new Childhood(
-            null,
-            childhoodData.name,
-            childhoodData.description,
-            childhoodData.gift,
-            childhoodData.giftDescription
-        );
-        return await childhoodRepository.update(id, childhood);
+        return await childhoodRepository.update(id, childhoodData);
     },
 
     async delete(id) {

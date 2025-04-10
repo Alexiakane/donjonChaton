@@ -34,6 +34,10 @@ export const userService = {
         return true;
     },
 
+    async refresh(token) {
+        //TODO
+    },
+
     async getAll() {
         return await userRepository.getAll();
     },
@@ -48,7 +52,9 @@ export const userService = {
             userData.fullname,
             userData.username,
             userData.email,
-            userData.password
+            userData.password,
+            userData.avatar,
+            userData.idRole
         );
 
         const validation = newUser.estValide();
@@ -60,14 +66,7 @@ export const userService = {
     },
 
     async update(id, userData) {
-        const user = new User(
-            null,
-            userData.fullname,
-            userData.username,
-            userData.email,
-            userData.password
-        );
-        return await userRepository.update(id, user);
+        return await userRepository.update(id, userData);
     },
 
     async delete(id) {

@@ -32,12 +32,7 @@ export const equipmentService = {
     },
 
     async update(id, equipmentData) {
-        const equipment = new Equipment(
-            null,
-            equipmentData.name,
-            equipmentData.description
-        );
-        return await equipmentRepository.update(id, equipment);
+        return await equipmentRepository.update(id, equipmentData);
     },
 
     async delete(id) {

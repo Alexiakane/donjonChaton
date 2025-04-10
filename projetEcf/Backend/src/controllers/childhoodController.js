@@ -9,7 +9,7 @@ export const childhoodController = {
         try {
             const childhoods = await childhoodService.getAll();
             res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: childhoods }));
+            res.end(JSON.stringify({ success: true, childhoods: childhoods }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -22,7 +22,7 @@ export const childhoodController = {
             const childhood = await childhoodService.get(id);
             if (childhood) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: childhood }));
+                res.end(JSON.stringify({ success: true, childhood: childhood }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Enfance non trouvée' }));
@@ -39,7 +39,7 @@ export const childhoodController = {
             const body = await parseRequestBody(req);
             const childhood = await childhoodService.create(body);
             res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, data: childhood }));
+            res.end(JSON.stringify({ success: true, childhood: childhood }));
         } catch (error) {
             logError(error);
             res.writeHead(500, { 'Content-Type': 'application/json' });
@@ -53,7 +53,7 @@ export const childhoodController = {
             const childhood = await childhoodService.update(id, body);
             if (childhood) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, data: childhood }));
+                res.end(JSON.stringify({ success: true, childhood: childhood }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Enfance non trouvée' }));

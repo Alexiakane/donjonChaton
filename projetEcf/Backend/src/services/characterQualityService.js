@@ -18,9 +18,9 @@ export const characterQualityService = {
 
     async create(characterQualityData) {
         let newCharacterQuality = new CharacterQuality(
-            null,
-            characterQualityData.name,
-            characterQualityData.description
+            characterQualityData.idCharacter,
+            characterQualityData.idQuality,
+            characterQualityData.level
         );
 
         const validation = newCharacterQuality.estValide();
@@ -32,12 +32,7 @@ export const characterQualityService = {
     },
 
     async update(characterId, qualityId, characterQualityData) {
-        const characterQuality = new CharacterQuality(
-            null,
-            characterQualityData.name,
-            characterQualityData.description
-        );
-        return await characterQualityRepository.update(characterId, qualityId, characterQuality);
+        return await characterQualityRepository.update(characterId, qualityId, characterQualityData);
     },
 
     async delete(characterId, qualityId) {

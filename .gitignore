@@ -1,10 +1,4 @@
 coverage
-coverage/base.css
-coverage/block-navigation.js
-coverage/index.html
-coverage/prettify.css
-coverage/sorter.js
-coverage/prettify.js
 node_modules
 projetEcf/Backend/logs
 projetEcf/Backend/logs/access.log

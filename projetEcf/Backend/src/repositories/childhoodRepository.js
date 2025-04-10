@@ -53,7 +53,7 @@ export const childhoodRepository = {
     },
 
     async update(id, childhood) {
-        const query = `UPDATE "Childhood" SET Name = $1, Description = $2, Gift = $3, Gift_Description = $4 WHERE ID_Childhood = $3 RETURNING ID_Childhood`;
+        const query = `UPDATE "Childhood" SET Name = $1, Description = $2, Gift = $3, Gift_Description = $4 WHERE ID_Childhood = $3 RETURNING *`;
         const params = [childhood.name, childhood.description, childhood.gift, childhood.gift_description, id];
         const result = await dbQuery(query, params);
         return result.rows[0];

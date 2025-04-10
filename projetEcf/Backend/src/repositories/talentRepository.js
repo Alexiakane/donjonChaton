@@ -1,6 +1,5 @@
 import db from '../../config/database.js';
 import { Talent } from '../models/Talent.js';
-import { CharacterFullTalent } from '../models/CharacterFullTalent.js';
 import { logError } from '../utils/logger.js';
 
 async function dbQuery(query, params = []) {
@@ -47,9 +46,10 @@ export const talentRepository = {
             + ' INNER JOIN "Talent" t ON ct.ID_Talent = t.ID_Talent'
             + ' WHERE ct.ID_Character = $1';
             const result = await dbQuery(query, [characterId]);
-            return result.rows.map(row => new CharacterFullTalent(
+            return result.rows.map(row => new Talent(
                 row.id_talent,
-                row.name
+                row.name,
+                row.description
             ));
         },
 
@@ -61,7 +61,7 @@ export const talentRepository = {
     },
 
     async update(id, talent) {
-        const query = `UPDATE "Talent" SET Name = $1, Description = $2 WHERE ID_Talent = $3 RETURNING ID_Talent`;
+        const query = `UPDATE "Talent" SET Name = $1, Description = $2 WHERE ID_Talent = $3 RETURNING *`;
         const params = [talent.name, talent.description, id];
         const result = await dbQuery(query, params);
         return result.rows[0];

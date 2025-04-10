@@ -49,7 +49,7 @@ export const roleRepository = {
     },
 
     async update(id, role) {
-        const query = `UPDATE "Role" SET Name = $1, Description = $2 WHERE ID_Role = $3 RETURNING ID_Role`;
+        const query = `UPDATE "Role" SET Name = $1, Description = $2 WHERE ID_Role = $3 RETURNING *`;
         const params = [role.name, role.description, id];
         const result = await dbQuery(query, params);
         return result.rows[0];

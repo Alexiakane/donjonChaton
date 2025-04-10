@@ -28,12 +28,7 @@ export const traitService = {
     },
 
     async update(id, traitData) {
-        const trait = new Trait(
-            null,
-            traitData.name,
-            traitData.description
-        );
-        return await traitRepository.update(id, trait);
+        return await traitRepository.update(id, traitData);
     },
 
     async delete(id) {

@@ -86,8 +86,8 @@ export const characterController = {
         try {
             const result = await characterService.delete(id);
             if (result) {
-                res.writeHead(204, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true }));
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, message: 'Character supprimé avec succès'  }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Personnage non trouvé' }));
