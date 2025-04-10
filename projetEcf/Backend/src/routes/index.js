@@ -28,7 +28,7 @@ export default async function router(req, res) {
     
     // Vérification de l'authentification pour les routes de notre serveur 
     // (sauf login et register qui sont publiques)
-    if (req.url != '/users/login' && req.url != '/users/register') {
+    if (req.url != '/user/login' && req.url != '/user/register') {
         const authedReq = await authMiddleware(req, res);
         if (!authedReq) return; 
         const user = authedReq.user;

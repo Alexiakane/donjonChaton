@@ -12,6 +12,10 @@ export const characterService = {
         return await characterRepository.getAll();
     },
 
+    async getsByUserId(idUser) {
+        return await characterRepository.getsByUserId(idUser);
+    },
+
     async getFull(id) {
         const characterFull = await characterRepository.getFull(id);
         //appel pour lister les qualites

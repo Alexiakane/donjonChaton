@@ -35,6 +35,23 @@ export const characterRepository = {
         ));
     },
 
+    async getsByUserId(idUser) {
+        const query = 'SELECT * FROM "Character" WHERE ID_User = $1';
+        const results = await dbQuery(query, [idUser]);
+        return results.rows.map(row => new Character(
+            row.id_character,
+                row.name,
+                row.heart_points,
+                row.friendship_points,
+                row.id_childhood,
+                row.id_trait,
+                row.id_user,
+                row.story,
+                row.portrait,
+                row.xp
+        ));
+    },
+
     async getFull(id) {
         const query = 'SELECT cha.*,'
         + ' chi.name as chiname, chi.description as chidescr, chi.gift as chigift, chi.gift_description as chigiftdesc,'

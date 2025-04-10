@@ -33,7 +33,7 @@ export const characterController = {
             res.end(JSON.stringify({ success: false, error: 'Erreur interne du serveur' }));
         }
     },
-    
+
     getCharacterById: async (req, res, id) => {
         try {
             const character = await characterService.get(id);
@@ -43,6 +43,23 @@ export const characterController = {
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Personnage non trouvé' }));
+            }
+        } catch (error) {
+            logError(error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, error: 'Erreur interne du serveur' }));
+        }
+    },
+    
+    getCharactersByUserId: async (req, res, idUser) => {
+        try {
+            const characters = await characterService.getsByUserId(idUser);
+            if (characters) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, characters: characters }));
+            } else {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, error: 'Personnages non trouvés' }));
             }
         } catch (error) {
             logError(error);

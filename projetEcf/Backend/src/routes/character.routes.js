@@ -8,10 +8,14 @@ export const characterRoutes = async (req, res) => {
     if (url === '/characters' && method === 'GET') {
         await characterController.getAllCharacters(req, res);
         return true;
+    } else if (url.startsWith('/characters/user/') && method === 'GET') {
+        const idUser = url.split('/')[3];
+        await characterController.getCharactersByUserId(req, res, idUser);
+        return true;
     } else if (url.startsWith('/character/full/') && method === 'GET') {
         const id = url.split('/')[3];
         await characterController.getCharacterFullById(req, res, id);
-        return true;
+        return true;    
     } else if (url.startsWith('/character/') && method === 'GET') {
         const id = url.split('/')[2];
         await characterController.getCharacterById(req, res, id);
