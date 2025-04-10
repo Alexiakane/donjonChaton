@@ -1,5 +1,9 @@
 import { characterRepository } from '../repositories/characterRepository.js';
 import { Character } from '../models/Character.js';
+import { characterQualityService } from './characterQualityService.js';
+import { equipmentService } from './equipmentService.js';
+import { meowgicService } from './meowgicService.js';
+import { talentService } from './talentService.js';
 import { logError } from '../utils/logger.js';
 
 export const characterService = {
@@ -10,6 +14,19 @@ export const characterService = {
 
     async getFull(id) {
         const characterFull = await characterRepository.getFull(id);
+        //appel pour lister les qualites
+        const characterQualities = await characterQualityService.getByCharacterId(id);
+        characterFull.qualities = characterQualities;
+        //appel pour lister les equipements
+        const characterEquipments = await equipmentService.getEquipmentsByCharacterId(id);
+        characterFull.equipments = characterEquipments;
+        //appel pour lister les meowgics
+        const characterMeowgics = await meowgicService.getMeowgicsByCharacterId(id);
+        characterFull.meowgics = characterMeowgics;
+        //appel pour lister les talents
+        const characterTalents = await talentService.getTalentsByCharacterId(id);
+        characterFull.talents = characterTalents;
+
         return characterFull;
     },
 
@@ -24,7 +41,6 @@ export const characterService = {
             characterData.heartPoints,
             characterData.friendshipPoints,
             characterData.idChildhood,
-            characterData.idGift,
             characterData.idTrait,
             characterData.idUser,
             characterData.story,
@@ -36,7 +52,7 @@ export const characterService = {
         if (!validation.valide) {
             logError(new Error(validation.erreur));
             throw new Error(validation.erreur);
-        }   
+        }
         return await characterRepository.create(newcharacter);
     },
 

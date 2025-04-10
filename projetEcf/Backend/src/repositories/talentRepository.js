@@ -41,6 +41,17 @@ export const talentRepository = {
         }
     },
 
+    async getByCharacterId(characterId) {
+            const query = 'SELECT t.* FROM "Character_Talent" ct'
+            + ' INNER JOIN "Talent" t ON ct.ID_Talent = t.ID_Talent'
+            + ' WHERE ct.ID_Character = $1';
+            const result = await dbQuery(query, [characterId]);
+            return result.rows.map(row => new CharacterFullTalent(
+                row.id_talent,
+                row.name
+            ));
+        },
+
     async create(talent) {
         const query = `INSERT INTO "Talent" (Name, Description) VALUES ($1, $2) RETURNING ID_Talent`;
         const params = [talent.name, talent.description];

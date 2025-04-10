@@ -1,5 +1,6 @@
 import db from '../../config/database.js';
 import { CharacterQuality } from '../models/CharacterQuality.js';
+import { CharacterFullQuality } from '../models/CharacterFullQuality.js';
 import { logError } from '../utils/logger.js';
 
 async function dbQuery(query, params = []) {
@@ -39,6 +40,18 @@ export const characterQualityRepository = {
         } else {
             return null;
         }
+    },
+
+    async getByCharacterId(characterId) {
+        const query = 'SELECT cq.*, q.name FROM "Character_Quality" cq'
+        + ' INNER JOIN "Quality" q ON cq.ID_Quality = q.ID_Quality'
+        + ' WHERE cq.ID_Character = $1';
+        const result = await dbQuery(query, [characterId]);
+        return result.rows.map(row => new CharacterFullQuality(
+            row.id_quality,
+            row.name,
+            row.level
+        ));
     },
 
     async create(characterQuality) {

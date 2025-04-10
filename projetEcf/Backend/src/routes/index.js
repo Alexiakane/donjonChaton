@@ -1,5 +1,4 @@
 import { characterRoutes } from './character.routes.js';
-import { giftRoutes } from './gift.routes.js';
 import { traitRoutes } from './trait.routes.js';
 import { childhoodRoutes } from './childhood.routes.js';
 import { equipmentRoutes } from './equipment.routes.js';
@@ -14,7 +13,6 @@ import authMiddleware from '../middlewares/authMiddleware.js';
 
 const allRoutes = [
     characterRoutes, 
-    giftRoutes, 
     traitRoutes, 
     childhoodRoutes, 
     equipmentRoutes,
