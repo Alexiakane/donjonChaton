@@ -5,6 +5,7 @@ npm i jsonwebtoken => pour l'authent
 npm i bcryptjs => pour l'authent
 npm i dotenv => pour la gestion du fichier env
 npm i vitest => pour les tests
+npm i -D @vitest/coverage-v8 => pour le coverage des tests
 
 créer le .env
 DATABASE_URL="postgres://postgres:postgres@localhost:5432/kittendungeon"

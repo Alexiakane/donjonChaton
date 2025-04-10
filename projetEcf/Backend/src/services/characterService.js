@@ -57,8 +57,7 @@ export const characterService = {
     },
 
     async update(id, characterData) {
-        const character = new Character(characterData);
-        return await characterRepository.update(id, character);
+        return await characterRepository.update(id, characterData);
     },
 
     async delete(id) {

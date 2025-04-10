@@ -19,19 +19,19 @@ async function dbQuery(query, params) {
 export const characterRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM Character';
+        const query = 'SELECT * FROM "Character"';
         const results = await dbQuery(query);
-        return results.map(row => new Character(
-            row.ID_Character,
-            row.Name,
-            row.Heart_Points,
-            row.Friendship_Points,
-            row.ID_Childhood,
-            row.ID_Trait,
-            row.ID_User,
-            row.Story,
-            row.Portrait,
-            row.Xp
+        return results.rows.map(row => new Character(
+            row.id_character,
+                row.name,
+                row.heart_points,
+                row.friendship_points,
+                row.id_childhood,
+                row.id_trait,
+                row.id_user,
+                row.story,
+                row.portrait,
+                row.xp
         ));
     },
 
@@ -66,21 +66,21 @@ export const characterRepository = {
     },
 
     async get(id) {
-        const query = 'SELECT * FROM Character WHERE ID_Character = $1';
+        const query = 'SELECT * FROM "Character" WHERE ID_Character = $1';
         const results = await dbQuery(query, [id]);
-        if (results.length > 0) {
-            const row = results[0];
+        if (results.rows.length > 0) {
+            const row = results.rows[0];
             return new Character(
-                row.ID_Character,
-                row.Name,
-                row.Heart_Points,
-                row.Friendship_Points,
-                row.ID_Childhood,
-                row.ID_Trait,
-                row.ID_User,
-                row.Story,
-                row.Portrait,
-                row.Xp
+                row.id_character,
+                row.name,
+                row.heart_points,
+                row.friendship_points,
+                row.id_childhood,
+                row.id_trait,
+                row.id_user,
+                row.story,
+                row.portrait,
+                row.xp
             );
         } else {
             return null;
@@ -101,11 +101,11 @@ export const characterRepository = {
             character.xp
         ];
         const result = await dbQuery(query, params);
-        return result.insertId;
+        return result.rows[0].id_character;
     },
 
     async update(id, character) {
-        const query = `UPDATE Character SET Name = $1, Heart_Points = $2, Friendship_Points = $3, ID_Childhood = $4, ID_Trait = $5, ID_User = $6, Story = $7, Portrait = $8, Xp = $9 WHERE ID_Character = $10 RETURNING ID_Character`;
+        const query = `UPDATE "Character" SET Name = $1, Heart_Points = $2, Friendship_Points = $3, ID_Childhood = $4, ID_Trait = $5, ID_User = $6, Story = $7, Portrait = $8, Xp = $9 WHERE ID_Character = $10 RETURNING *`;
         const params = [
             character.name,
             character.heartPoints,
@@ -118,12 +118,13 @@ export const characterRepository = {
             character.xp,
             id
         ];
-        await dbQuery(query, params);
+        const result = await dbQuery(query, params);
+        return result.rows[0];
     },
 
     async delete(id) {
-        const query = `DELETE FROM Character WHERE ID_Character = $1`;
-        await dbQuery(query, [id]);
+        const query = `DELETE FROM "Character" WHERE ID_Character = $1`;
+        const result = await dbQuery(query, [id]);
         if (result.rowCount === 0) {
             logError('Erreur de suppression : Personnage non trouvé');
             return -1;
