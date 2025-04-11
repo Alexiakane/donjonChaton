@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Rôles</title>
+    <link rel="stylesheet" href="../../style/style.css">
+    <link rel="stylesheet" href="../../style/pagesAdmin.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navLinks">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../login.html">Connection</a></li>
+                <li><a href="../register.html">Inscription</a></li>
+            </ul>
+            <div class="logo">
+                <img src="../../illustration/logo.png" alt="Logo">
+            </div>
+            <ul class="navLinks">
+                <li><a href="../createCharacter.html">Création de personnage</a></li>
+                <li><a href="../admin.html">Administration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-container">
+            <!-- Formulaire pour lister tous les rôles -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Lister tous les Rôles</h2>
+                    <button type="button" onclick="" class="btn-submit">Lister</button>
+                </form>
+            </div>
+
+            <!-- Formulaire de recherche -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Rechercher un Rôle</h2>
+                    <div class="form-group">
+                        <label for="search">Rechercher par Nom ou ID</label>
+                        <input type="text" id="search" name="search" placeholder="Nom ou ID du rôle" required>
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Rechercher</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="form-container">
+            <!-- Formulaire de création -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Créer un Rôle</h2>
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" placeholder="Nom du rôle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="Description du rôle" required></textarea>
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Créer</button>
+                </form>
+            </div>
+
+            <!-- Formulaire de modification -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Modifier un Rôle</h2>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="number" id="id" name="id" placeholder="ID du rôle" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" placeholder="Nom du rôle">
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="Description du rôle"></textarea>
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Modifier</button>
+                </form>
+            </div>
+        </section>
+
+        <section class="form-container">
+            <!-- Formulaire de suppression -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Supprimer un Rôle</h2>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="number" id="id" name="id" placeholder="ID du rôle" required>
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Supprimer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

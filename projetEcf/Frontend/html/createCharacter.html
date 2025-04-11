@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Création de personnage</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/createCharacter.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navLinks">
+                <li><a href="../html/index.html">Accueil</a></li>
+                <li><a href="../html/login.html">Connection</a></li>
+                <li><a href="../html/register.html">Inscription</a></li>
+            </ul>
+            <div class="logo">
+                <img src="../illustration/logo.png" alt="Logo">
+            </div>
+            <ul class="navLinks">
+                <li><a href="../html/createCharacter.html">Création de personnage</a></li>
+                <li><a href="../html/admin.html">Administration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="character-form">
+            <h1>Création de personnage</h1>
+            <form action="http://localhost:3000/create_character" method="POST" class="form">
+                <!-- Nom -->
+                <div class="form-group">
+                    <label for="name">Nom</label>
+                    <input type="text" id="name" name="name" placeholder="Nom du personnage" required>
+                </div>
+    
+                <!-- Enfance -->
+                <div class="form-group">
+                    <label for="childhood">Enfance</label>
+                    <select id="childhood" name="childhood" required>
+                        <option value="" disabled selected>Choisissez une enfance</option>
+                        <!-- Ajouter les valeurs ici -->
+                    </select>
+                </div>
+    
+                <!-- Traits de caractères -->
+                <div class="form-group">
+                    <label for="traits">Traits de caractères</label>
+                    <select id="traits" name="traits" required>
+                        <option value="" disabled selected>Choisissez un trait de caractère</option>
+                        <!-- Ajouter les valeurs ici -->
+                    </select>
+                </div>
+    
+                <!-- Qualités -->
+                <div class="form-group">
+                    <label>Qualités (répartissez 8 points entre les 3 qualités, minimum 1 point par qualité et maximum 5.)</label>
+                    <div class="quality-group">
+                        <label for="costaud">Costaud</label>
+                        <input type="number" id="costaud" name="costaud" min="1" max="5" value="1" required>
+                    </div>
+                    <div class="quality-group">
+                        <label for="malin">Malin</label>
+                        <input type="number" id="malin" name="malin" min="1" max="5" value="1" required>
+                    </div>
+                    <div class="quality-group">
+                        <label for="mignon">Mignon</label>
+                        <input type="number" id="mignon" name="mignon" min="1" max="5" value="1" required>
+                    </div>
+                </div>
+    
+                <!-- Histoire -->
+                <div class="form-group">
+                    <label for="story">Histoire (facultatif)</label>
+                    <textarea id="story" name="story" placeholder="Racontez l'histoire de votre personnage"></textarea>
+                </div>
+    
+                <!-- Bouton de soumission -->
+                <button type="submit" class="btn-submit">Créer le personnage</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

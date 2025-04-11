@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../style/style.css">
+    <link rel="stylesheet" href="../../style/pagesAdmin.css">
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul class="navLinks">
+                <li><a href="../index.html">Accueil</a></li>
+                <li><a href="../login.html">Connection</a></li>
+                <li><a href="../register.html">Inscription</a></li>
+            </ul>
+            <div class="logo">
+                <img src="../../illustration/logo.png" alt="Logo">
+            </div>
+            <ul class="navLinks">
+                <li><a href="../createCharacter.html">Création de personnage</a></li>
+                <li><a href="../admin.html">Administration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="form-container">
+            <!-- Formulaire pour lister toutes les Miagies -->
+            <div class="form-wrapper">
+                <form class="form" action="http://localhost:3000/list_meowgic" method="GET">
+                    <h2>Lister toutes les Miagies</h2>
+                    <button type="submit" class="btn-submit">Lister</button>
+                </form>
+            </div>
+    
+            <!-- Formulaire de recherche -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Rechercher une Miagie</h2>
+                    <div class="form-group">
+                        <label for="search">Rechercher par Type ou ID</label>
+                        <input type="text" id="search" name="search" placeholder="Type ou ID de la Miagie" required>
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Rechercher</button>
+                </form>
+            </div>
+        </section>
+    
+        <section class="form-container">
+            <!-- Formulaire de création -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Créer une Miagie</h2>
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" placeholder="Nom de la Miagie" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type" required>
+                            <option value="" disabled selected>Choisissez un type</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="Description de la Miagie" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="difficulty">Difficulté (1 à 3)</label>
+                        <input type="number" id="difficulty" name="difficulty" min="1" max="3" required>
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Créer</button>
+                </form>
+            </div>
+    
+            <!-- Formulaire de modification -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Modifier une Miagie</h2>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="number" id="id" name="id" placeholder="ID de la Miagie" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" placeholder="Nom de la Miagie">
+                    </div>
+                    <div class="form-group">
+                        <label for="type">Type</label>
+                        <select id="type" name="type">
+                            <option value="" disabled selected>Choisissez un type</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea id="description" name="description" placeholder="Description de la Miagie"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="difficulty">Difficulté (1 à 3)</label>
+                        <input type="number" id="difficulty" name="difficulty" min="1" max="3">
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Modifier</button>
+                </form>
+            </div>
+        </section>
+    
+        <section class="form-container">
+            <!-- Formulaire de suppression -->
+            <div class="form-wrapper">
+                <form class="form">
+                    <h2>Supprimer une Miagie</h2>
+                    <div class="form-group">
+                        <label for="id">ID</label>
+                        <input type="number" id="id" name="id" placeholder="ID de la Miagie" required>
+                    </div>
+                    <button type="button" onclick="" class="btn-submit">Supprimer</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <script src="../../script.js"></script>
+
+</body>
+
+</html>
