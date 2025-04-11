@@ -165,7 +165,7 @@ function creerPersonnage() {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({ name, idChildhood, idTrait, description })
+        body: JSON.stringify({ name, idChildhood, idTrait, qualities, description })
     })
         .then(response => response.json())
         .then(data => {
