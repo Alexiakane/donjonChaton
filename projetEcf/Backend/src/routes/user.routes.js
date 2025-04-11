@@ -14,7 +14,7 @@ export const userRoutes = async (req, res) => {
     } else if (url === '/user/logout' && method === 'POST') {
         await userController.logout(req, res);
         return true;
-    } else if (url === '/user/refresh' && method === 'POST') {
+    } else if (url === '/user/refresh' && method === 'GET') {
         await userController.refresh(req, res);
         return true;
     } else if (url.startsWith('/user/username/') && method === 'GET') {
@@ -31,9 +31,6 @@ export const userRoutes = async (req, res) => {
     } else if (url.startsWith('/user/') && method === 'GET') {
         const id = url.split('/')[2];
         await userController.getUserById(req, res, id);
-        return true;
-    } else if (url === '/user' && method === 'POST') {
-        await userController.createUser(req, res);
         return true;
     } else if (url.startsWith('/user/') && method === 'PUT') {
         const id = url.split('/')[2];

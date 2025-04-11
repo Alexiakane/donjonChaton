@@ -30,12 +30,20 @@ export const userService = {
     },
 
     async logout(token) {
+        //TODO
         // Invalidate the token (this is a placeholder, actual implementation may vary)
         return true;
     },
 
     async refresh(token) {
-        //TODO
+        // Refresh the token (this is a placeholder, actual implementation may vary)
+        const decoded = jwt.verify(token, process.env.TOKEN);
+        const user = await userRepository.get(decoded.id);
+        if (!user) {
+            return null;
+        }
+        const newToken = jwt.sign({ id: user.id }, process.env.TOKEN, { expiresIn: '1h' });
+        return { user, token: newToken };
     },
 
     async getAll() {
@@ -44,25 +52,6 @@ export const userService = {
 
     async get(id) {
         return await userRepository.get(id);
-    },
-
-    async create(userData) {
-        let newUser = new User(
-            null,
-            userData.fullname,
-            userData.username,
-            userData.email,
-            userData.password,
-            userData.avatar,
-            userData.idRole
-        );
-
-        const validation = newUser.estValide();
-        if (!validation.valide) {
-            logError(new Error(validation.erreur));
-            throw new Error(validation.erreur);
-        }   
-        return await userRepository.create(newUser);
     },
 
     async update(id, userData) {

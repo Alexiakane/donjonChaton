@@ -59,8 +59,8 @@ export const userRepository = {
     },
 
     async update(id, user) {
-        const query = `UPDATE "User" SET Username = $1, Password = $2, Email = $3, ID_Role = $4 WHERE ID_User = $5 RETURNING *`;
-        const params = [user.fullname, user.username, user.password, user.email, user.idRole, id];
+        const query = `UPDATE "User" SET Fullname = $1, Username = $2, Password = $3, Email = $4, ID_Role = $5, Avatar = $6 WHERE ID_User = $7 RETURNING *`;
+        const params = [user.fullname, user.username, user.password, user.email, user.idRole, user.avatar, id];
         const result = await dbQuery(query, params);
         return result.rows[0];
     },

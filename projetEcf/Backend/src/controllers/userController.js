@@ -112,19 +112,6 @@ export const userController = {
         }
     },
 
-    createUser: async (req, res) => {
-        try {
-            const body = await parseRequestBody(req);
-            const user = await userService.create(body);
-            res.writeHead(201, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: true, user: user }));
-        } catch (error) {
-            logError(error);
-            res.writeHead(500, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ success: false, error: 'Erreur interne du serveur' }));
-        }
-    },
-
     updateUser: async (req, res, id) => {
         try {
             const body = await parseRequestBody(req);
@@ -160,10 +147,9 @@ export const userController = {
         }
     },
 
-    findByUsername: async (req, res) => {
+    findByUsername: async (req, res, username) => {
         try {
-            const body = await parseRequestBody(req);
-            const user = await userService.findByUsername(body.username);
+            const user = await userService.findByUsername(username);
             if (user) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true, user: user }));
@@ -178,10 +164,9 @@ export const userController = {
         }
     },
 
-    findByEmail: async (req, res) => {
+    findByEmail: async (req, res, email) => {
         try {
-            const body = await parseRequestBody(req);
-            const user = await userService.findByEmail(body.email);
+            const user = await userService.findByEmail(email);
             if (user) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: true, user: user }));

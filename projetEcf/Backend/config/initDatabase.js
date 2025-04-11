@@ -186,6 +186,24 @@ const insertData = async () => {
         }
     });
 
+    const equipments = [
+        [1, 'Gourde', 'une gourde en cuir pour transporter de l\'eau'],
+        [2, 'Rations', 'des rations de nourriture pour un voyage de 3 jours'],
+        [3, 'Corde', 'une corde de 10 mètres'],
+        [4, 'Couverture', 'une couverture en laine ou en fourrure, pour se protéger du froid'],
+    ];
+
+    equipments.forEach(async (equipment) => {
+        await db.query(`INSERT INTO "Equipment" (ID_Equipment, Name, Description) VALUES ($1, $2, $3) ON CONFLICT DO NOTHING`, equipment),
+            function logError(err) {
+                if (err) {
+                    console.error('Error inserting equipment:', err);
+                } else {
+                    console.log('Equipment inserted successfully');
+                }
+            }
+    });
+
 };
 
 insertData().catch(err => console.error(err))
