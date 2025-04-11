@@ -1,0 +1,70 @@
+/* Centrer le formulaire dans la page */
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Prend toute la hauteur de la fenêtre */
+    background-color: #fef8ec; /* Couleur de fond pour le contraste */
+    margin: 0;
+}
+
+/* Style pour le formulaire d'inscription */
+.register-form {
+    max-width: 400px;
+    width: 100%;
+    padding: 2em;
+    background-color: #ffffff;
+    border: 1px solid #a54b43;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Centre le contenu à l'intérieur */
+}
+
+.register-form h1 {
+    color: #a54b43;
+    margin-bottom: 1em;
+}
+
+.form-group {
+    margin-bottom: 1.5em;
+    text-align: left; /* Aligne les labels à gauche */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+    color: #a54b43;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.8em;
+    border: 1px solid #a54b43;
+    border-radius: 4px;
+    font-size: 1em;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ff9800;
+    box-shadow: 0 0 5px rgba(255, 152, 0, 0.5);
+}
+
+.btn-submit {
+    display: block;
+    width: 100%;
+    padding: 0.8em;
+    background-color: #a54b43;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #ff9800;
+}

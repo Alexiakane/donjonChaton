@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/register.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="navLinks">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="login.html">Connection</a></li>
+                <li><a href="register.html">Inscription</a></li>
+            </ul>
+            <div class="logo">
+                <img src="../illustration/logo.png" alt="Logo">
+            </div>
+            <ul class="navLinks">
+                <li><a href="createCharacter.html">Création de personnage</a></li>
+                <li><a href="admin.html">Administration</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="register-form">
+            <h1>Inscription</h1>
+            <form action="submit_registration.php" method="POST">
+                <div class="form-group">
+                    <label for="fullName">Nom complet</label>
+                    <input type="text" id="fullName" name="fullName" placeholder="Entrez votre nom complet" required>
+                </div>
+                <div class="form-group">
+                    <label for="username">Pseudo</label>
+                    <input type="text" id="username" name="username" placeholder="Entrez votre pseudo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                </div>
+                <button type="submit" class="btn-submit">S'inscrire</button>
+            </form>
+        </section>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
