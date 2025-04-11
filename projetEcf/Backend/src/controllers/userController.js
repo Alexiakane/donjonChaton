@@ -25,6 +25,7 @@ export const userController = {
 
     register: async (req, res) => {
         try {
+            console.log('register controller'+req);
             const body = await parseRequestBody(req);
             const user = await userService.register(body.fullname, body.email, body.password, body.username);
             if (user) {
