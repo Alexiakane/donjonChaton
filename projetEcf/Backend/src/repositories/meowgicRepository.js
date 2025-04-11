@@ -60,7 +60,7 @@ export const meowgicRepository = {
     },
 
     async create(meowgic) {
-        const query = `INSERT INTO "Meowgic" (Name, Type, Description, Difficulty) VALUES ($1, $2) RETURNING ID_Meowgic`;
+        const query = `INSERT INTO "Meowgic" (Name, Type, Description, Difficulty) VALUES ($1, $2, $3, $4) RETURNING ID_Meowgic`;
         const params = [meowgic.name, meowgic.type, meowgic.description, meowgic.difficulty];
         const result = await dbQuery(query, params);
         return result.rows[0].id_meowgic;

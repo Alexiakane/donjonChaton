@@ -127,20 +127,20 @@ const insertData = async () => {
 
     childhoods.forEach(async (childhood) => {
         await db.query(`INSERT INTO "Childhood" (ID_Childhood, Name, Description, Gift, Gift_Description) VALUES ($1, $2, $3, $4, $5) ON CONFLICT DO NOTHING`, childhood),
-        function logError(err) {
-            if (err) {
-                console.error('Error inserting childhood:', err);
-            } else {
-                console.log('Childhood inserted successfully');
+            function logError(err) {
+                if (err) {
+                    console.error('Error inserting childhood:', err);
+                } else {
+                    console.log('Childhood inserted successfully');
+                }
             }
-        }
     });
 
     const meowgics = [
         [1, 'Patrouille en chaussons', 'Miagie des tours (Costaud)', 'Jusqu\'au prochain crépuscule, le Chaton et ses compagnons peuvent marcher et courir sans avoir mal aux pattes, se blesser les coussinets ou se tordre la cheville.', 1],
         [2, 'Motte de terre', 'Miagie des tours (Costaud)', 'En quelques coups de patte, le Chaton creuse un terrier pour se cacher ou dresse une butte de terre pour se protéger du vent, de la pluie ou de ses ennemis.', 1],
         [3, 'Porte-voix', 'Miagie des tours (Costaud)', 'La voix du Chaton devient énorme, terriblement forte, et elle peut être entendue à plusieurs centaines de mètres (et au-delà), sans beaucoup d\'effort de sa part.', 1],
-        [4, 'Pattenrond', 'Miagie des tours (Costaud)', 'Le Chaton trouve un endroit protégé, caché, confortable, abrité et chaud où il peut passer la nuit et roupiller tranquillement sans que rien ne le dérange.',2],
+        [4, 'Pattenrond', 'Miagie des tours (Costaud)', 'Le Chaton trouve un endroit protégé, caché, confortable, abrité et chaud où il peut passer la nuit et roupiller tranquillement sans que rien ne le dérange.', 2],
         [5, 'Premier secours', 'Miagie des tours (Costaud)', 'En plein conflit, le Chaton rend un point de coeur à l\'un de ses camarades.', 2],
         [6, 'Longue nuit', 'Miagie des tours (Costaud)', 'Alerte et vigilant, le Chaton ne dort pas de toute la nuit, à part quelques minutes un peu après l\'aube, mais il est parfaitement reposé le lendemain.', 3],
         [7, 'Bénédiction d\'honneur', 'Miagie des grand\'salles (Costaud)', 'Jusqu\'à la prochaine aube, le Chaton ne peut pas être surpris ou attaqué par derrière ou en traître. L\'effet du sort s\'interrompt s\'il agit lui-même de manière déloyale.', 1],
@@ -157,14 +157,14 @@ const insertData = async () => {
         [18, 'Objets vivants', 'Miagie des ateliers (Malin)', 'Jusqu\'à la prochaine aube, le Chaton anime un objet (de la taille d\'une table au maximum) qui peut alors se déplacer, obéir à des ordres simples et même le défendre.', 3],
         [19, 'Couleur des herbes', 'Miagie des champs (Malin)', 'Jusqu\'à la prochaine aube ou le prochain crépuscule, la fourrure du Chaton s\'adapte lentement à la couleur de son environnement et le cache de ses ennemis.', 1],
         [20, 'Soin des bêtes', 'Miagie des champs (Malin)', 'Le Chaton soigne complètement une bête malade ou blessée, la débarrasse de ses parasites et lui rend le poil, les plumes ou les écailles brillantes.', 1],
-        [21, 'Passage sans trace','Miagie des champs (Malin)', 'Jusqu\'à la prochaine aube, le Chaton brouille sa piste et efface ses empreintes. Il devient très difficile à pister et à suivre, sauf par miagie.', 1],
+        [21, 'Passage sans trace', 'Miagie des champs (Malin)', 'Jusqu\'à la prochaine aube, le Chaton brouille sa piste et efface ses empreintes. Il devient très difficile à pister et à suivre, sauf par miagie.', 1],
         [22, 'Vif comme le vent', 'Miagie des champs (Malin)', 'Jusqu\'à la prochaine aube ou au prochain crépuscule, le Chaton peut courir deux fois plus vite et trois fois plus longtemps, sans se fatiguer outre mesure.', 2],
         [23, 'Nuée d\'insectes', 'Miagie des champs (Malin)', 'Jusqu\'à la prochaine aube, le Chaton contrôle les insectes proches, pour les éloigner de lui ou encore pour les envoyer embêter quelqu\'un en vue.', 2],
         [24, 'Parler avec les arbres', 'Miagie des champs (Malin)', 'En posant sa main sur son écorce, le Chaton peut engager un dialogue avec un arbre. Plus celui-ci est vieux, plus il est intelligent et sa mémoire est importante.', 3],
         [25, 'Propre et rangé', 'Miagie des villes (Mignon)', 'Le Chaton range et nettoie une pièce (grande ou petite) - le temps que cela prend dépend du désordre et de la salissure, mais ça va habituellement assez vite.', 1],
         [26, 'Mille yeux', 'Miagie des villes (Mignon)', 'Jusqu\'à la prochaine aube, le Chaton a les yeux partout et remarque les détails. Il devient très difficile de lui faire les poches ou de le prendre en filature.', 1],
         [27, 'Son et lumière', 'Miagie des villes (Mignon)', 'Le Chaton crée des sons, de la musique et des lumières autrour de lui pour se mettre en scène et se donner en spectacle.', 1],
-        [28, 'Voix enchanteresse', 'Miagie des villes (Mignon)','La voix du Chaton devient incroyablement douce et profonde, capable de calmer et d\'endormir ou d\'éveiller de vives émotions quand il raconte une histoire.', 2],
+        [28, 'Voix enchanteresse', 'Miagie des villes (Mignon)', 'La voix du Chaton devient incroyablement douce et profonde, capable de calmer et d\'endormir ou d\'éveiller de vives émotions quand il raconte une histoire.', 2],
         [29, 'chat de gouttière', 'Miagie des villes (Mignon)', 'Jusqu\'à la prochaine aube, le Chaton ne peut pas perdre l\'équilibre, glisser dans la boue ou sur la neige, tomber d\'un toit ou d\'un arbre.', 2],
         [30, 'Soins', 'Miagie des villes (Mignon)', 'Pendant une pause, le Chaton dépense un point d\'amitié et rend un point de coeur à chacun de ses camarades présents.', 3],
         [31, 'Conservation des ressources', 'Miagie des caravanes (Mignon)', 'Jusqu\à la prochaine aube, le Chaton protège la nourriture, les herbes ou le matériel de tout risque de détérioration ou de pourriture.', 1],
@@ -172,18 +172,18 @@ const insertData = async () => {
         [33, 'Parler aux bêtes', 'Miagie des caravanes (Mignon)', 'Jusqu\'à la prochaine aube, le Chaton peut échanger quelques paroles avec les bêtes et leur donner des ordres simples (auxquels elles obéissent ou pas).', 1],
         [34, 'Voir au loin', 'Miagie des caravanes (Mignon)', 'Jusqu\à la prochaine aube, le Chaton voit parfaitement au loin comme s\'il utilisait des jumellless ou une longue-vue', 2],
         [35, 'Dissimulation d\'objets', 'Miagie des caravanes (Mignon)', 'Le Chaton cache de menus objets (de la taille de son poing) dans les replis de ses poils, les rendant très difficiles à trouver, même en le fouillant soigneusement.', 2],
-        [36, 'Sentir la route', 'Miagie des caravanes (Mignon)', 'En posant sa main sur le chemin, le Chaton sait si des créatures y voyagent ou se cachent dans ses abords. Il en connaît le nombre, mais pas la nature exacte.',3]
+        [36, 'Sentir la route', 'Miagie des caravanes (Mignon)', 'En posant sa main sur le chemin, le Chaton sait si des créatures y voyagent ou se cachent dans ses abords. Il en connaît le nombre, mais pas la nature exacte.', 3]
     ];
 
     meowgics.forEach(async (meowgic) => {
         await db.query(`INSERT INTO "Meowgic" (ID_Meowgic, Name, Type, Description, Difficulty) VALUES ($1, $2, $3, $4, $5) ON CONFLICT DO NOTHING`, meowgic),
-        function logError(err) {
-            if (err) {
-                console.error('Error inserting meowgic:', err);
-            } else {
-                console.log('Meowgic inserted successfully');
+            function logError(err) {
+                if (err) {
+                    console.error('Error inserting meowgic:', err);
+                } else {
+                    console.log('Meowgic inserted successfully');
+                }
             }
-        }
     });
 
     const equipments = [
@@ -203,6 +203,15 @@ const insertData = async () => {
                 }
             }
     });
+
+    // Majoration des sequences de la base de données
+    await db.query(`ALTER SEQUENCE public."Childhood_id_childhood_seq" RESTART WITH 19`);
+    await db.query(`ALTER SEQUENCE public."Equipment_id_equipment_seq" RESTART WITH 5`);
+    await db.query(`ALTER SEQUENCE public."Meowgic_id_meowgic_seq" RESTART WITH 37`);
+    await db.query(`ALTER SEQUENCE public."Quality_id_quality_seq" RESTART WITH 4`);
+    await db.query(`ALTER SEQUENCE public."Role_id_role_seq" RESTART WITH 3`);
+    await db.query(`ALTER SEQUENCE public."Talent_id_talent_seq" RESTART WITH 24`);
+    await db.query(`ALTER SEQUENCE public."Trait_id_trait_seq" RESTART WITH 19`);
 
 };
 
