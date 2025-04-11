@@ -38,6 +38,7 @@ async function login() {
 
     if (response.ok) {
         localStorage.setItem("token", data.user.token);
+        localStorage.setItem("idUser", data.user.user.id); // Stocker l'ID de l'utilisateur
         alert("Connexion réussie ! Bienvenue ");
         window.location.href = "index.html";
     }
@@ -128,17 +129,17 @@ function creerPersonnage() {
     const costaud = document.getElementById("costaud").value;
     const mignon = document.getElementById("mignon").value;
     const malin = document.getElementById("malin").value;
-    const description = document.getElementById("description").value;
-    if (costaud + mignon + malin > 8) {
+    const story = document.getElementById("story").value;
+    if (costaud + mignon + malin == 8) {
         alert("La somme des traits ne doit pas dépasser 8.");
         return;
     }
-    if (name === "" || childhoodId === "" || traitId === "" || description === "") {
+    if (name === "" || idChildhood === "" || idTrait === "" || story === "") {
         alert("Veuillez remplir tous les champs.");
         return;
     }
-    if (description.length > 100) {
-        alert("La description ne doit pas dépasser 100 caractères.");
+    if (story.length > 100) {
+        alert("La story ne doit pas dépasser 100 caractères.");
         return;
     }
     if (name.length > 50) {
@@ -158,14 +159,22 @@ function creerPersonnage() {
         { id: "2", level: malin },
         { id: "3", level: mignon }
     ]
+    const idUser = localStorage.getItem("idUser");
+    if (!idUser) {
+        alert("Utilisateur non trouvé.");
+        return;
+    }
+    const equipments = [];
+    const talents = [];
+    const meowgics = [];
 
-    fetch("http://localhost:4000/character", {
+    fetch("http://localhost:4000/characterfull", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({ name, idChildhood, idTrait, qualities, description })
+        body: JSON.stringify({ idUser, name, idChildhood, idTrait, qualities, story, equipments, talents, meowgics })
     })
         .then(response => response.json())
         .then(data => {
