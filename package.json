@@ -9,7 +9,8 @@
     "coverage": "vitest run --coverage",
     "create_database": "node ./projetEcf/Backend/config/createDatabase.js",
     "init_database": "node ./projetEcf/Backend/config/initDatabase.js",
-    "start": "node ./projetEcf/Backend/src/server.js"
+    "start_backend": "node ./projetEcf/Backend/src/server.js",
+    "start_frontend": "node ./projetEcf/Frontend/server.js"
   },
   "repository": {
     "type": "git",
