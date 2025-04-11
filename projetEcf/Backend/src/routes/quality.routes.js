@@ -6,7 +6,7 @@ export const qualityRoutes = async (req, res) => {
     const method = req.method;
 
     if (url === '/qualities' && method === 'GET') {
-        await qualityController.getAllQuality(req, res);
+        await qualityController.getAllQualities(req, res);
         return true;
     } else if (url.startsWith('/quality/') && method === 'GET') {
         const id = url.split('/')[2];

@@ -17,7 +17,7 @@ async function dbQuery(query, params = []) {
 export const equipmentRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "Equipment"';
+        const query = 'SELECT * FROM "Equipment" ORDER BY ID_Equipment';
         const result = await dbQuery(query);
         return result.rows.map(row => new Equipment(
             row.id_equipment,
@@ -44,7 +44,8 @@ export const equipmentRepository = {
     async getByCharacterId(characterId) {
         const query = 'SELECT e.* FROM "Character_Equipment" ce'
             + ' INNER JOIN "Equipment" e ON ce.ID_Equipment = e.ID_Equipment'
-            + ' WHERE ce.ID_Character = $1';
+            + ' WHERE ce.ID_Character = $1'
+            + ' ORDER BY e.ID_Equipment';
         const result = await dbQuery(query, [characterId]);
         return result.rows.map(row => new Equipment(
             row.id_equipment,

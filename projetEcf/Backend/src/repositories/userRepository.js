@@ -19,7 +19,7 @@ export const userRepository = {
 
 
     async getAll() {
-        const query = 'SELECT * FROM "User"';
+        const query = 'SELECT * FROM "User" ORDER BY ID_User ASC';
         const result = await dbQuery(query);
         return result.rows.map(row => new User(
             row.id_user,

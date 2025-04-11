@@ -17,7 +17,7 @@ async function dbQuery(query, params = []) {
 export const traitRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "Trait"';
+        const query = 'SELECT * FROM "Trait" ORDER BY ID_Trait';
         const result = await dbQuery(query);
         return result.rows.map(row => new Trait(
             row.id_trait,

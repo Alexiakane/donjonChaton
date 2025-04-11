@@ -17,7 +17,7 @@ async function dbQuery(query, params = []) {
 export const meowgicRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "Meowgic"';
+        const query = 'SELECT * FROM "Meowgic" ORDER BY ID_Meowgic';
         const result = await dbQuery(query);
         return result.rows.map(row => new Meowgic(
             row.id_meowgic,
@@ -48,7 +48,8 @@ export const meowgicRepository = {
     async getByCharacterId(characterId) {
         const query = 'SELECT m.* FROM "Character_Meowgic" cm'
         + ' INNER JOIN "Meowgic" m ON cm.ID_Meowgic = m.ID_Meowgic'
-        + ' WHERE cm.ID_Character = $1';
+        + ' WHERE cm.ID_Character = $1'
+        + ' ORDER BY m.ID_Meowgic';
         const result = await dbQuery(query, [characterId]);
         return result.rows.map(row => new Meowgic(
             row.id_meowgic,

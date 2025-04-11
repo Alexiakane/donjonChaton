@@ -17,7 +17,7 @@ async function dbQuery(query, params = []) {
 export const childhoodRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "Childhood"';
+        const query = 'SELECT * FROM "Childhood" ORDER BY ID_Childhood';
         const result = await dbQuery(query);
         return result.rows.map(row => new Childhood(
             row.id_childhood,

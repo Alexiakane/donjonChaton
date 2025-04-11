@@ -19,7 +19,7 @@ async function dbQuery(query, params) {
 export const characterRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "Character"';
+        const query = 'SELECT * FROM "Character" ORDER BY ID_Character';
         const results = await dbQuery(query);
         return results.rows.map(row => new Character(
             row.id_character,

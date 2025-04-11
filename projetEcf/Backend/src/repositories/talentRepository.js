@@ -17,7 +17,7 @@ async function dbQuery(query, params = []) {
 export const talentRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "Talent"';
+        const query = 'SELECT * FROM "Talent" ORDER BY ID_Talent';
         const result = await dbQuery(query);
         return result.rows.map(row => new Talent(
             row.id_talent,
@@ -44,7 +44,8 @@ export const talentRepository = {
     async getByCharacterId(characterId) {
             const query = 'SELECT t.* FROM "Character_Talent" ct'
             + ' INNER JOIN "Talent" t ON ct.ID_Talent = t.ID_Talent'
-            + ' WHERE ct.ID_Character = $1';
+            + ' WHERE ct.ID_Character = $1'
+            + ' ORDER BY ID_Talent';
             const result = await dbQuery(query, [characterId]);
             return result.rows.map(row => new Talent(
                 row.id_talent,

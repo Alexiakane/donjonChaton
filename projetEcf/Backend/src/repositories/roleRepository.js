@@ -17,7 +17,7 @@ async function dbQuery(query, params = []) {
 export const roleRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "Role"';
+        const query = 'SELECT * FROM "Role" ORDER BY ID_Role';
         const result = await dbQuery(query);
         return result.rows.map(row => new Role(
             row.id_role,
