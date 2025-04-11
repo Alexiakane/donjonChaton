@@ -15,6 +15,8 @@ TOKEN=1cPh4ZPlC3Sb2M5L6gBi8J7TttTFCFTGdEqhDIUde36ilB4hkCo07YrffxC0m23W677H432LzF
 Commandes disponibles :
 npm run create_database permet de créer la structure de la database
 npm run init_database permet d'alimenter des données principales de paramétrage
-npm run start permet de lancer le serveur backend
+npm run start_backend permet de lancer le serveur backend
+npm run start_frontend permet de lancer le serveur front
 npm test permet d'exécuter les tests unitaires
+npm run coverage permet de réaliser la couverture de tests
  

@@ -81,6 +81,19 @@ export const characterController = {
         }
     },
 
+    createCharacterFull: async (req, res) => {
+        try {
+            const body = await parseRequestBody(req);
+            const character = await characterService.createFull(body);
+            res.writeHead(201, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: true, character: character }));
+        } catch (error) {
+            logError(error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, error: 'Erreur interne du serveur' }));
+        }
+    },
+
     updateCharacter: async (req, res, id) => {
         try {
             const body = await parseRequestBody(req);
@@ -104,7 +117,24 @@ export const characterController = {
             const result = await characterService.delete(id);
             if (result) {
                 res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.end(JSON.stringify({ success: true, message: 'Character supprimé avec succès'  }));
+                res.end(JSON.stringify({ success: true, message: 'Personnage supprimé avec succès'  }));
+            } else {
+                res.writeHead(404, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: false, error: 'Personnage non trouvé' }));
+            }
+        } catch (error) {
+            logError(error);
+            res.writeHead(500, { 'Content-Type': 'application/json' });
+            res.end(JSON.stringify({ success: false, error: 'Erreur interne du serveur' }));
+        }
+    },
+
+    deleteCharacterFull: async (req, res, id) => {
+        try {
+            const result = await characterService.deleteFull(id);
+            if (result) {
+                res.writeHead(200, { 'Content-Type': 'application/json' });
+                res.end(JSON.stringify({ success: true, message: 'Personnage supprimé avec succès'  }));
             } else {
                 res.writeHead(404, { 'Content-Type': 'application/json' });
                 res.end(JSON.stringify({ success: false, error: 'Personnage non trouvé' }));

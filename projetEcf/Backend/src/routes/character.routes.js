@@ -12,8 +12,8 @@ export const characterRoutes = async (req, res) => {
         const idUser = url.split('/')[3];
         await characterController.getCharactersByUserId(req, res, idUser);
         return true;
-    } else if (url.startsWith('/character/full/') && method === 'GET') {
-        const id = url.split('/')[3];
+    } else if (url.startsWith('/characterfull/') && method === 'GET') {
+        const id = url.split('/')[2];
         await characterController.getCharacterFullById(req, res, id);
         return true;    
     } else if (url.startsWith('/character/') && method === 'GET') {
@@ -23,6 +23,9 @@ export const characterRoutes = async (req, res) => {
     } else if (url === '/character' && method === 'POST') {
         await characterController.createCharacter(req, res);
         return true;
+    } else if (url === '/characterfull' && method === 'POST') {
+        await characterController.createCharacterFull(req, res);
+        return true;
     } else if (url.startsWith('/character/') && method === 'PUT') {
         const id = url.split('/')[2];
         await characterController.updateCharacter(req, res, id);
@@ -30,6 +33,10 @@ export const characterRoutes = async (req, res) => {
     } else if (url.startsWith('/character/') && method === 'DELETE') {
         const id = url.split('/')[2];
         await characterController.deleteCharacter(req, res, id);
+        return true;
+    } else if (url.startsWith('/characterfull/') && method === 'DELETE') {
+        const id = url.split('/')[2];
+        await characterController.deleteCharacterFull(req, res, id);
         return true;
     }
 };

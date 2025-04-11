@@ -147,5 +147,62 @@ export const characterRepository = {
             return -1;
         }
         return result.rowCount;
+    },
+
+    async createQualityLink(id, qualities) {
+        const query = `INSERT INTO "Character_Quality" (ID_Character, ID_Quality, Level) VALUES ($1, $2, $3)`;
+        for (const quality of qualities) {
+            const params = [id, quality.id, quality.level];
+            await dbQuery(query, params);
+        }
+        return true;
+    },
+
+    async createEquipmentLink(id, equipments) {
+        const query = `INSERT INTO "Character_Equipment" (ID_Character, ID_Equipment) VALUES ($1, $2)`;
+        for (const equipment of equipments) {
+            const params = [id, equipment.id];
+            await dbQuery(query, params);
+        }
+        return true;
+    },
+
+    async createMeowgicLink(id, meowgics) {
+        const query = `INSERT INTO "Character_Meowgic" (ID_Character, ID_Meowgic) VALUES ($1, $2)`;
+        for (const meowgic of meowgics) {
+            const params = [id, meowgic.id];
+            await dbQuery(query, params);
+        }
+        return true;
+    },
+
+    async createTalentLink(id, talents) {
+        const query = `INSERT INTO "Character_Talent" (ID_Character, ID_Talent) VALUES ($1, $2)`;
+        for (const talent of talents) {
+            const params = [id, talent.id];
+            await dbQuery(query, params);
+        }
+        return true;
+    },
+
+    async deleteQualityLink(id) {
+        const query = `DELETE FROM "Character_Quality"  WHERE ID_Character = $1`;
+        return await dbQuery(query, [id]);
+    },
+
+    async deleteEquipmentLink(id, equipments) {
+        const query = `DELETE FROM "Character_Equipment"  WHERE ID_Character = $1`;
+        return await dbQuery(query, [id]);
+    },
+
+    async deleteMeowgicLink(id, meowgics) {
+        const query = `DELETE FROM "Character_Meowgic"  WHERE ID_Character = $1`;
+        return await dbQuery(query, [id]);
+    },
+
+    async deleteTalentLink(id, talents) {
+        const query = `DELETE FROM "Character_Talent"  WHERE ID_Character = $1`;
+        return await dbQuery(query, [id]);
     }
+
 };
