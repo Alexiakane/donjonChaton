@@ -19,4 +19,25 @@ npm run start_backend permet de lancer le serveur backend
 npm run start_frontend permet de lancer le serveur front
 npm test permet d'exécuter les tests unitaires
 npm run coverage permet de réaliser la couverture de tests
- 
+
+Structure du projet:(C'était la structure initial mais j'ai eu du mal avec le serveur coté front il arrivait pas a recup le css du coup )
+
+donjonChaton/
+
+├── Backend/
+│   ├── controllers/         # Logique métier
+│   ├── models/              # Modèles de données
+│   ├── routes/              # Définition des routes API
+│   ├── server.js            # Serveur backend
+├── docs/
+│   ├── donjon & chaton.png      #MLD
+│   ├── donjonChaton.drawio.png  #MCD
+├── Frontend/
+│   ├── html/                # Fichiers HTML
+│   ├── style/               # Fichiers CSS
+│   ├── illustration/        # Images et illustrations
+│   ├── script.js            # Fichier JavaScript principal
+├── .env                     # Variables d'environnement
+├── [package.json] # Dépendances et scripts
+├── [README.md] # Documentation du projet
+
