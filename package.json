@@ -10,7 +10,7 @@
     "create_database": "node ./projetEcf/Backend/config/createDatabase.js",
     "init_database": "node ./projetEcf/Backend/config/initDatabase.js",
     "start_backend": "node ./projetEcf/Backend/src/server.js",
-    "start_frontend": "node ./projetEcf/Frontend/server.js"
+    "start_frontend": "node ./projetEcf/Frontend/server.mjs"
   },
   "repository": {
     "type": "git",
