@@ -18,24 +18,24 @@ async function dbQuery(query, params = []) {
 export const characterQualityRepository = {
 
     async getAll() {
-        const query = 'SELECT * FROM "CharacterQuality" ORDER BY ID_Character, ID_Quality';
+        const query = 'SELECT * FROM "Character_Quality" ORDER BY ID_Character, ID_Quality';
         const result = await dbQuery(query);
         return result.rows.map(row => new CharacterQuality(
             row.id_character,
             row.id_quality,
-            row.value
+            row.level
         ));
     },
 
     async get(characterId, qualityId) {
-        const query = 'SELECT * FROM "CharacterQuality" WHERE ID_Character = $1 AND ID_Quality = $2';
+        const query = 'SELECT * FROM "Character_Quality" WHERE ID_Character = $1 AND ID_Quality = $2';
         const result = await dbQuery(query, [characterId, qualityId]);
         if (result.rows.length > 0) {
             const row = result.rows[0];
             return new CharacterQuality(
                 row.id_character,
                 row.id_quality,
-                row.value
+                row.level
             );
         } else {
             return null;
@@ -55,21 +55,21 @@ export const characterQualityRepository = {
     },
 
     async create(characterQuality) {
-        const query = `INSERT INTO "CharacterQuality" (ID_Character, Id_Quality, Value) VALUES ($1, $2, $3) RETURNING ID_Character, ID_Quality`;
-        const params = [characterQuality.characterId, characterQuality.qualityId, characterQuality.value];
+        const query = `INSERT INTO "Character_Quality" (ID_Character, Id_Quality, level) VALUES ($1, $2, $3) RETURNING ID_Character, ID_Quality`;
+        const params = [characterQuality.idCharacter, characterQuality.idQuality, characterQuality.level];
         const result = await dbQuery(query, params);
         return result.rows[0];
     },
 
     async update(characterId, qualityId, characterQuality) {
-        const query = `UPDATE "CharacterQuality" SET Value = $1 WHERE  ID_Character = $2 AND ID_Quality = $3 RETURNING ID_Character, ID_Quality`;
-        const params = [characterQuality.value, characterId, qualityId];
+        const query = `UPDATE "Character_Quality" SET Level = $1 WHERE  ID_Character = $2 AND ID_Quality = $3 RETURNING *`;
+        const params = [characterQuality.level, characterId, qualityId];
         const result = await dbQuery(query, params);
         return result.rows[0];
     },
 
     async delete(characterId, qualityId) {
-        const query = `DELETE FROM "CharacterQuality" WHERE ID_Character = $1 AND ID_Quality = $2`;
+        const query = `DELETE FROM "Character_Quality" WHERE ID_Character = $1 AND ID_Quality = $2`;
         const result = await dbQuery(query, [characterId, qualityId]);
         if (result.rowCount === 0) {
             logError('Erreur de suppression : Lien personnage et qualité non trouvé');
