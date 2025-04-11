@@ -20,7 +20,7 @@ npm run start_frontend permet de lancer le serveur front
 npm test permet d'exécuter les tests unitaires
 npm run coverage permet de réaliser la couverture de tests
 
-Structure du projet:(C'était la structure initial mais j'ai eu du mal avec le serveur coté front il arrivait pas a recup le css du coup )
+Structure du projet:(C'était la structure initial mais j'ai eu du mal avec le serveur coté front il arrivait pas a recup le css du coup j'ai tout mis dans le dossier html...)
 
 donjonChaton/
 
@@ -41,3 +41,6 @@ donjonChaton/
 ├── [package.json] # Dépendances et scripts
 ├── [README.md] # Documentation du projet
 
+Côté Front : La création d'utilisateur, la connexion et la création de personnages fonctionnent mais j'ai pas eu le temps de faire le reste...
+J'ai eu beaucoups de problème avec le CORS et mis beaucoups de temps à trouver la solution. 
+Côté Back : Tout fonctionne et il y a une collection Postman disponible dans le dossier tests.
