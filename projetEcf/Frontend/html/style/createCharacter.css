@@ -41,7 +41,9 @@ main {
 .form-group input,
 .form-group select,
 .form-group textarea {
-    width: 100%;
+    width: 80%;         /* Réduit la largeur pour mieux centrer */
+    margin: 0 auto;     /* Centre horizontalement */
+    display: block;     /* Nécessaire pour margin auto */
     padding: 0.8em;
     border: 1px solid #a54b43;
     border-radius: 4px;
@@ -64,22 +66,26 @@ main {
 /* Style pour les qualités */
 .quality-group {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    gap: 1em;
     margin-bottom: 1em;
+    align-items: center;
+    justify-content: center;
 }
 
 .quality-group label {
     font-weight: bold;
     color: #a54b43;
-    margin-bottom: 0.5em;
+    margin-bottom: 0;
+    margin-right: 0.5em;
+    white-space: nowrap;
 }
 
 .quality-group input {
-    width: 100%;
-    padding: 0.8em;
-    border: 1px solid #a54b43;
-    border-radius: 4px;
-    font-size: 1em;
+    width: 60px;
+    min-width: 0;
+    padding: 0.5em;
+    text-align: center;
 }
 
 .btn-submit {

@@ -21,8 +21,6 @@ const mimeTypes = {
   '.ico': 'image/x-icon',
 };
 
-
-
 const serveStaticFile = async (filePath, res) => {
   try {
     const data = await readFile(filePath);

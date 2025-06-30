@@ -1,4 +1,17 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
 main {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -25,7 +38,7 @@ main {
 
 .form-group {
     margin-bottom: 1.5em;
-    text-align: left;
+    text-align: center;
 }
 
 .form-group label {
@@ -33,10 +46,13 @@ main {
     margin-bottom: 0.5em;
     color: #a54b43;
     font-weight: bold;
+    text-align: center;
 }
 
 .form-group input {
-    width: 100%;
+    width: 80%;
+    margin: 0 auto;
+    display: block;
     padding: 0.8em;
     border: 1px solid #a54b43;
     border-radius: 4px;

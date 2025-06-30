@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connection</title>
     <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/login.css">
+    <link rel="stylesheet" href="./style/user.css">
 </head>
 <body>
     <header>
@@ -26,22 +26,17 @@
         </nav>
     </header>
     <main>
-        <section class="login-form">
-            <h1>Connexion</h1>
-            <form action="submit_login.php" method="POST">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" placeholder="Entrez votre email" required>
+        <section class="user-section">
+            <h1>Mes créations</h1>
+            <div class="user-content">
+                <div class="user-item">
+                    <h2>Personnages</h2>
+                    <button type="button" onclick="listCharacters()" class="btn-action">Lister</button>
+                    <button type="button" onclick="searchCharacter()" class="btn-action">Rechercher</button>
+                    <button type="button" onclick="deleteCharacter()" class="btn-action">Supprimer</button>
                 </div>
-                <div class="form-group">
-                    <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
-                </div>
-                <button type="button" onclick="login()" class="btn-submit">Se connecter</button>
-            </form>
-        </section>
+                <div id="characterList"></div>
+            </div>
+            </section>
     </main>
-
-    <script src="./script.js"></script>
-</body>
-</html>
+            <script src="./script.js"></script>

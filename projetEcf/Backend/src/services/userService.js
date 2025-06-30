@@ -32,6 +32,15 @@ export const userService = {
     async logout(token) {
         //TODO
         // Invalidate the token (this is a placeholder, actual implementation may vary)
+        if (!token) {
+            return false; // No token provided
+        }
+        try {
+            jwt.verify(token, process.env.TOKEN);
+        } catch (error) {
+            logError('Invalid token', error);
+            return false; // Token is invalid
+        }
         return true;
     },
 
@@ -55,6 +64,26 @@ export const userService = {
     },
 
     async update(id, userData) {
+        const user = await userRepository.get(id);
+        if (!user) {
+            return null;
+        }
+        if (userData.password) {
+            userData.password = await bcrypt.hash(userData.password, 10);
+        }
+        if (userData.email) {
+            const existingUser = await userRepository.findByEmail(userData.email);
+            if (existingUser && existingUser.id !== id) {
+                return null; // Email already in use by another user
+            }
+        }
+        if (userData.username) {
+            const existingUser = await userRepository.findByUsername(userData.username);
+            if (existingUser && existingUser.id !== id) {
+                return null; // Username already in use by another user
+            }
+        }
+        userData.id = id; // Ensure the ID is set for the update
         return await userRepository.update(id, userData);
     },
 

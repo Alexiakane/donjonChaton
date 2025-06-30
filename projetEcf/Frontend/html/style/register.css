@@ -27,7 +27,7 @@ main {
 
 .form-group {
     margin-bottom: 1.5em;
-    text-align: left; /* Aligne les labels à gauche */
+    text-align: center; /* Centrer le contenu */
 }
 
 .form-group label {
@@ -35,10 +35,13 @@ main {
     margin-bottom: 0.5em;
     color: #a54b43;
     font-weight: bold;
+    text-align: center; /* Centrer le texte du label */
 }
 
 .form-group input {
-    width: 100%;
+    width: 80%;         /* Réduit la largeur pour mieux centrer */
+    margin: 0 auto;     /* Centre horizontalement */
+    display: block;     /* Nécessaire pour margin auto */
     padding: 0.8em;
     border: 1px solid #a54b43;
     border-radius: 4px;

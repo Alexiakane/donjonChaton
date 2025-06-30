@@ -14,7 +14,7 @@
         <nav>
             <ul class="navLinks">
                 <li><a href="../index.html">Accueil</a></li>
-                <li><a href="../login.html">Connection</a></li>
+                <li><a href="../login.html">Connexion</a></li>
                 <li><a href="../register.html">Inscription</a></li>
             </ul>
             <div class="logo">
@@ -30,9 +30,9 @@
         <section class="form-container">
             <!-- Formulaire pour lister toutes les Miagies -->
             <div class="form-wrapper">
-                <form class="form" action="http://localhost:3000/list_meowgic" method="GET">
+                <form class="form">
                     <h2>Lister toutes les Miagies</h2>
-                    <button type="submit" class="btn-submit">Lister</button>
+                    <button type= "button" onclick="listMeowgics()" id="listButton" class="btn-submit">Lister</button>
                 </form>
             </div>
     
@@ -120,6 +120,26 @@
                 </form>
             </div>
         </section>
+        
+      <!-- Boîte modale -->
+<div id="infoModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Liste des Meowgics</h2>
+        <table id="modalInfoTable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Les données seront insérées ici -->
+            </tbody>
+        </table>
+    </div>
+</div>
     </main>
     <script src="../../script.js"></script>
 
