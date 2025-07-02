@@ -12,18 +12,15 @@
 <body>
     <header>
         <nav>
-            <ul class="navLinks">
-                <li><a href="index.html">Accueil</a></li>
-                <li><a href="login.html">Connexion</a></li>
-                <li><a href="register.html">Inscription</a></li>
-            </ul>
             <div class="logo">
                 <img src="./illustration/logo.png" alt="Logo">
             </div>
             <ul class="navLinks">
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="admin.html">Grimoire</a></li>
                 <li><a href="createCharacter.html">Création de personnage</a></li>
                 <li><a href="user.html">Mes créations</a></li>
-                <li><a href="admin.html">Grimoire</a></li>
+                <li><a href="login.html">Connexion</a></li>
             </ul>
         </nav>
     </header>
@@ -39,6 +36,10 @@
                     <label for="password">Mot de passe</label>
                     <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe"
                         required>
+                </div>
+                <div class="form-group">
+                    <label for="Pas encore inscrit ?">Pas encore inscrit ?</label>
+                    <a class="link-register" href="register.html">Inscrivez-vous ici</a>
                 </div>
                 <button type="button" onclick="login()" class="btn-submit">Se connecter</button>
             </form>
