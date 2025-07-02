@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/login.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -21,7 +23,7 @@
             <ul class="navLinks">
                 <li><a href="createCharacter.html">Création de personnage</a></li>
                 <li><a href="user.html">Mes créations</a></li>
-                <li><a href="admin.html">Administration</a></li>
+                <li><a href="admin.html">Grimoire</a></li>
             </ul>
         </nav>
     </header>
@@ -35,7 +37,8 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Mot de passe</label>
-                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                    <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe"
+                        required>
                 </div>
                 <button type="button" onclick="login()" class="btn-submit">Se connecter</button>
             </form>
@@ -43,5 +46,14 @@
     </main>
 
     <script src="./script.js"></script>
+    
+    <!-- Modale pour messages -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-message">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
 </body>
+
 </html>

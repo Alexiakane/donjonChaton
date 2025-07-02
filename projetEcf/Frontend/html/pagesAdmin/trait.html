@@ -20,7 +20,7 @@
             </div>
             <ul class="navLinks">
                 <li><a href="../createCharacter.html">Création de personnage</a></li>
-                <li><a href="../admin.html">Administration</a></li>
+                <li><a href="../admin.html">Grimoire</a></li>
             </ul>
         </nav>
     </header>
@@ -48,56 +48,25 @@
         </section>
 
         <section class="form-container">
-            <!-- Formulaire de création -->
-            <div class="form-wrapper">
-                <form class="form">
-                    <h2>Créer un Trait</h2>
-                    <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" id="name" name="name" placeholder="Nom du trait" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" placeholder="Description du trait" required></textarea>
-                    </div>
-                    <button type="button" onclick="" class="btn-submit">Créer</button>
-                </form>
+            <!-- Boîte modale -->
+            <div id="infoModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Liste des Traits</h2>
+                    <table id="modalInfoTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Les données des traits seront insérées ici dynamiquement -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
-
-            <!-- Formulaire de modification -->
-            <div class="form-wrapper">
-                <form class="form">
-                    <h2>Modifier un Trait</h2>
-                    <div class="form-group">
-                        <label for="id">ID</label>
-                        <input type="number" id="id" name="id" placeholder="ID du trait" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name">Nom</label>
-                        <input type="text" id="name" name="name" placeholder="Nom du trait">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea id="description" name="description" placeholder="Description du trait"></textarea>
-                    </div>
-                    <button type="button" onclick="" class="btn-submit">Modifier</button>
-                </form>
-            </div>
-        </section>
-
-        <section class="form-container">
-            <!-- Formulaire de suppression -->
-            <div class="form-wrapper">
-                <form class="form">
-                    <h2>Supprimer un Trait</h2>
-                    <div class="form-group">
-                        <label for="id">ID</label>
-                        <input type="number" id="id" name="id" placeholder="ID du trait" required>
-                    </div>
-                    <button type="button" onclick="" class="btn-submit">Supprimer</button>
-                </form>
-            </div>
-        </section>
     </main>
 </body>
 </html>

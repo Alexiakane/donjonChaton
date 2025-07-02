@@ -23,7 +23,7 @@
             <ul class="navLinks">
                 <li><a href="createCharacter.html">Création de personnage</a></li>
                 <li><a href="user.html">Mes créations</a></li>
-                <li><a href="admin.html">Administration</a></li>
+                <li><a href="admin.html">Grimoire</a></li>
             </ul>
         </nav>
     </header>
@@ -68,6 +68,23 @@
                         <input type="number" id="mignon" min="1" max="5">
                     </div>
                 </div>
+                <div class="form-group" id="meowgics-group">
+                    <label>Sorts (Miagie) à choisir :</label>
+                    <select id="meowgic1" name="meowgic1" required></select>
+                    <select id="meowgic2" name="meowgic2" required></select>
+                    <select id="meowgic3" name="meowgic3" style="display:none"></select>
+                    <small id="meowgicsHelp" style="display:block;margin-top:0.5em;color:#a54b43;"></small>
+                </div>
+
+                <!-- Talents -->
+                <div class="form-group" id="talents-group">
+                    <label>Talents à choisir :</label>
+                    <select id="talent1" name="talent1" required></select>
+                    <select id="talent2" name="talent2" required></select>
+                    <small id="talentsHelp" style="display:block;margin-top:0.5em;color:#a54b43;">
+                        Vous devez choisir 2 talents différents.
+                    </small>
+                </div>
 
                 <!-- Histoire -->
                 <div class="form-group">
@@ -84,6 +101,14 @@
     <script src="./script.js"></script>
     <script>listChildhood();</script>
     <script>listTraits();</script>
+    
+    <!-- Modale pour messages -->
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <span class="close-message">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
 </body>
 
 </html>

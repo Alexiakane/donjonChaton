@@ -16,8 +16,13 @@ async function register() {
     console.log(data);
 
     if (response.ok) {
-        alert("Inscription réussie ! Vous pouvez maintenant vous connecter.");
-        window.location.href = "login.html";
+        showMessageModal("Inscription réussie ! Vous pouvez maintenant vous connecter.");
+        setTimeout(() => {
+            window.location.href = "login.html";
+        }, 2000);
+    } else {
+        // Affiche un message d'erreur si l'inscription échoue
+        showMessageModal(data.message || "Erreur lors de l'inscription. Veuillez réessayer.");
     }
 }
 
@@ -39,8 +44,13 @@ async function login() {
     if (response.ok) {
         localStorage.setItem("token", data.user.token);
         localStorage.setItem("idUser", data.user.user.id); // Stocker l'ID de l'utilisateur
-        alert("Connexion réussie ! Bienvenue ");
-        window.location.href = "index.html";
+        showMessageModal("Connexion réussie ! Bienvenue ");
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 2000);
+    } else {
+        // Affiche un message d'erreur si la connexion échoue
+        showMessageModal(data.message || "Erreur lors de la connexion. Vérifiez vos identifiants.");
     }
 }
 
@@ -60,7 +70,7 @@ async function logout() {
 
     if (response.ok) {
         localStorage.removeItem("token");
-        alert("Déconnexion réussie ! À bientôt.");
+        showMessageModal("Déconnexion réussie ! À bientôt.");
         window.location.href = "login.html";
     }
 }
@@ -88,7 +98,7 @@ async function listChildhood() {
             childhoodList.appendChild(opt);
         });
     } else {
-        alert("Erreur lors de la récupération des souvenirs d'enfance.");
+        showMessageModal("Erreur lors de la récupération des souvenirs d'enfance. Veuillez vous assurer que vous êtes connecté.");
     }
 
 }
@@ -117,8 +127,156 @@ async function listTraits() {
             traitList.appendChild(opt);
         });
     } else {
-        alert("Erreur lors de la récupération des traits.");
+        showMessageModal("Erreur lors de la récupération des traits. Veuillez vous assurer que vous êtes connecté.");
     }
+}
+
+// Remplit les 3 menus déroulants avec les sorts depuis l'API
+async function populateMeowgicsDropdowns() {
+
+    const selects = [
+        document.getElementById("meowgic1"),
+        document.getElementById("meowgic2"),
+        document.getElementById("meowgic3")
+    ];
+    selects.forEach(sel => sel.innerHTML = "");
+
+    try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:4000/meowgics", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            credentials: "include"
+        });
+        const data = await response.json();
+        const meowgics = Array.isArray(data) ? data : data.meowgics;
+
+        selects.forEach(sel => {
+            const defaultOpt = document.createElement("option");
+            defaultOpt.value = "";
+            defaultOpt.textContent = "Choisissez un sort";
+            sel.appendChild(defaultOpt);
+
+            meowgics.forEach(m => {
+                const option = document.createElement("option");
+                option.value = m.id;
+                // Affiche le nom du sort + la qualité (stockée dans m.type)
+                option.textContent = `${m.name} (${m.type})`;
+                sel.appendChild(option);
+            });
+        });
+    } catch (e) {
+        selects.forEach(sel => {
+            sel.innerHTML = "<option disabled>Erreur lors du chargement des sorts</option>";
+        });
+    }
+}
+
+// Affiche ou masque le 3e select selon l'enfance
+function handleMeowgicsDropdowns() {
+    const childhoodSelect = document.getElementById("childhood");
+    const meowgic3 = document.getElementById("meowgic3");
+    const help = document.getElementById("meowgicsHelp");
+    if (!childhoodSelect || !meowgic3 || !help) return;
+
+    if (childhoodSelect.options[childhoodSelect.selectedIndex]?.text === "Miage") {
+        meowgic3.style.display = "";
+        help.textContent = "Vous pouvez choisir 3 sorts.";
+        meowgic3.required = true;
+    } else {
+        meowgic3.style.display = "none";
+        help.textContent = "Vous pouvez choisir 2 sorts.";
+        meowgic3.value = "";
+        meowgic3.required = false;
+    }
+}
+
+// Empêche de choisir deux fois le même sort
+function preventDuplicateMeowgics() {
+    const selects = [
+        document.getElementById("meowgic1"),
+        document.getElementById("meowgic2"),
+        document.getElementById("meowgic3")
+    ];
+    selects.forEach((sel, idx) => {
+        sel.onchange = function () {
+            const values = selects.map(s => s.value);
+            selects.forEach((s, i) => {
+                Array.from(s.options).forEach(opt => {
+                    opt.disabled = false;
+                    if (opt.value && values.includes(opt.value) && values.indexOf(opt.value) !== i) {
+                        opt.disabled = true;
+                    }
+                });
+            });
+        };
+    });
+}
+
+// Remplit les 2 menus déroulants avec les talents depuis l'API
+async function populateTalentsDropdowns() {
+    const selects = [
+        document.getElementById("talent1"),
+        document.getElementById("talent2")
+    ];
+    selects.forEach(sel => sel.innerHTML = "");
+
+    try {
+        const token = localStorage.getItem("token");
+        const response = await fetch("http://localhost:4000/talents", {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            credentials: "include"
+        });
+        const data = await response.json();
+        const talents = Array.isArray(data) ? data : data.talents;
+
+        selects.forEach(sel => {
+            const defaultOpt = document.createElement("option");
+            defaultOpt.value = "";
+            defaultOpt.textContent = "Choisissez un talent";
+            sel.appendChild(defaultOpt);
+
+            talents.forEach(t => {
+                const option = document.createElement("option");
+                option.value = t.id;
+                // Affiche le nom du talent + éventuellement une catégorie si tu as un champ type/categorie
+                option.textContent = t.name + (t.type ? ` (${t.type})` : "");
+                sel.appendChild(option);
+            });
+        });
+    } catch (e) {
+        selects.forEach(sel => {
+            sel.innerHTML = "<option disabled>Erreur lors du chargement des talents</option>";
+        });
+    }
+}
+
+// Empêche de choisir deux fois le même talent
+function preventDuplicateTalents() {
+    const selects = [
+        document.getElementById("talent1"),
+        document.getElementById("talent2")
+    ];
+    selects.forEach((sel, idx) => {
+        sel.onchange = function () {
+            const values = selects.map(s => s.value);
+            selects.forEach((s, i) => {
+                Array.from(s.options).forEach(opt => {
+                    opt.disabled = false;
+                    if (opt.value && values.includes(opt.value) && values.indexOf(opt.value) !== i) {
+                        opt.disabled = true;
+                    }
+                });
+            });
+        };
+    });
 }
 
 function creerPersonnage() {
@@ -131,27 +289,27 @@ function creerPersonnage() {
     const malin = document.getElementById("malin").value;
     const story = document.getElementById("story").value;
     if (costaud + mignon + malin == 8) {
-        alert("La somme des traits ne doit pas dépasser 8.");
+        showMessageModal("La somme des traits ne doit pas dépasser 8.");
         return;
     }
     if (name === "" || idChildhood === "" || idTrait === "") {
-        alert("Veuillez remplir tous les champs.");
+        showMessageModal("Veuillez remplir tous les champs.");
         return;
     }
     if (story.length > 100) {
-        alert("La story ne doit pas dépasser 100 caractères.");
+        showMessageModal("La story ne doit pas dépasser 100 caractères.");
         return;
     }
     if (name.length > 50) {
-        alert("Le nom ne doit pas dépasser 50 caractères.");
+        showMessageModal("Le nom ne doit pas dépasser 50 caractères.");
         return;
     }
     if (costaud < 0 || mignon < 0 || malin < 0) {
-        alert("Les traits doivent être des valeurs positives.");
+        showMessageModal("Les traits doivent être des valeurs positives.");
         return;
     }
-    if (costaud >= 5 || mignon >= 5 || malin >= 5) {
-        alert("Les traits doivent être inférieurs ou égaux à 5.");
+    if (costaud > 5 || mignon > 5 || malin > 5) {
+        showMessageModal("Les traits doivent être inférieurs ou égaux à 5.");
         return;
     }
     const qualities = [
@@ -161,29 +319,42 @@ function creerPersonnage() {
     ]
     const idUser = localStorage.getItem("idUser");
     if (!idUser) {
-        alert("Utilisateur non trouvé.");
+        showMessageModal("Utilisateur non trouvé.");
         return;
     }
-    const equipments = [];
+    const equipments = [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
     const talents = [];
+    const t1 = document.getElementById("talent1").value;
+    const t2 = document.getElementById("talent2").value;
+    if (t1) talents.push({ id: t1 });
+    if (t2) talents.push({ id: t2 });
     const meowgics = [];
-
+    const m1 = document.getElementById("meowgic1").value;
+    const m2 = document.getElementById("meowgic2").value;
+    const m3 = document.getElementById("meowgic3").value;
+    if (m1) meowgics.push({ id: m1 });
+    if (m2) meowgics.push({ id: m2 });
+    if (m3 && document.getElementById("meowgic3").style.display !== "none") meowgics.push({ id: m3 });
+    const heartPoints = parseInt(costaud) + parseInt(malin);
+    const friendshipPoints = parseInt(mignon);
     fetch("http://localhost:4000/characterfull", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             "Authorization": `Bearer ${token}`
         },
-        body: JSON.stringify({ idUser, name, idChildhood, idTrait, qualities, story, equipments, talents, meowgics })
+        body: JSON.stringify({ idUser, name, heartPoints, friendshipPoints, idChildhood, idTrait, qualities, story, equipments, talents, meowgics })
     })
         .then(response => response.json())
         .then(data => {
             console.log(data);
             if (data.success) {
-                alert("Personnage créé avec succès !");
-                window.location.href = "index.html";
+                showMessageModal("Personnage créé avec succès !");
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 2000);
             } else {
-                alert("Erreur lors de la création du personnage.");
+                showMessageModal("Erreur lors de la création du personnage.");
             }
         })
         .catch(error => console.error('Erreur:', error));
@@ -221,7 +392,7 @@ async function listMeowgics() {
                 const descriptionCell = document.createElement("td");
 
                 idCell.textContent = meowgic.id;
-                nameCell.textContent = meowgic.name;
+                nameCell.textContent = `${meowgic.name} (${meowgic.type})`;
                 descriptionCell.textContent = meowgic.description;
 
                 row.appendChild(idCell);
@@ -237,7 +408,7 @@ async function listMeowgics() {
         // Afficher la boîte modale
         modal.style.display = "block";
     } else {
-        alert("Erreur lors de la récupération des meowgics.");
+        showMessageModal("Erreur lors de la récupération des meowgics.");
     }
 
 };
@@ -248,7 +419,7 @@ async function listCharacters() {
     const idUser = localStorage.getItem("idUser");
 
     if (!idUser) {
-        alert("Utilisateur non trouvé.");
+        showMessageModal("Utilisateur non trouvé.");
         return;
     }
 
@@ -268,11 +439,13 @@ async function listCharacters() {
         characterList.innerHTML = "";
         data.characters.forEach(character => {
             const li = document.createElement("li");
-            li.textContent = `${character.name} - ${character.story}`;
+            li.textContent = character.name || "";
+            li.style.cursor = "pointer";
+            li.onclick = () => showFullCharacterById(character.id);
             characterList.appendChild(li);
         });
     } else {
-        alert("Erreur lors de la récupération des personnages.");
+        showMessageModal("Erreur lors de la récupération des personnages. Veuillez vous assurer que vous êtes connecté.");
     }
 }
 // Fonction pour rechercher un personnage
@@ -281,7 +454,7 @@ async function searchCharacter() {
     const searchTerm = document.getElementById("searchTerm").value;
 
     if (!searchTerm) {
-        alert("Veuillez entrer un terme de recherche.");
+        showMessageModal("Veuillez entrer un terme de recherche.");
         return;
     }
 
@@ -301,11 +474,35 @@ async function searchCharacter() {
         characterList.innerHTML = "";
         data.characters.forEach(character => {
             const li = document.createElement("li");
-            li.textContent = `${character.name} - ${character.story}`;
+            li.textContent = character.name || "";
+            li.style.cursor = "pointer";
+            li.onclick = () => showFullCharacterById(character.id);
             characterList.appendChild(li);
         });
     } else {
-        alert("Erreur lors de la recherche du personnage.");
+        showMessageModal("Erreur lors de la recherche du personnage.");
+    }
+}
+
+// Fonction pour afficher les détails d'un personnage complet
+// Cette fonction est appelée lorsque l'utilisateur clique sur un personnage dans la liste
+async function showFullCharacterById(characterId) {
+    const token = localStorage.getItem("token");
+    const response = await fetch(`http://localhost:4000/characterfull/${characterId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+        credentials: "include"
+    });
+    const data = await response.json();
+    if (response.ok) {
+        // Affiche les infos comme tu veux, par exemple dans une modale :
+        showMessageModal(JSON.stringify(data.character, null, 2));
+        // Ou personnalise l'affichage selon tes besoins
+    } else {
+        showMessageModal("Erreur lors de la récupération du personnage.");
     }
 }
 
@@ -329,10 +526,10 @@ async function deleteCharacter(characterId) {
     console.log(data);
 
     if (response.ok) {
-        alert("Personnage supprimé avec succès !");
+        showMessageModal("Personnage supprimé avec succès !");
         listCharacters(); // Rafraîchir la liste des personnages
     } else {
-        alert("Erreur lors de la suppression du personnage.");
+        showMessageModal("Erreur lors de la suppression du personnage. Veuillez vous assurer que vous êtes connecté.");
     }
 }
 document.addEventListener("DOMContentLoaded", function () {
@@ -348,4 +545,34 @@ document.addEventListener("DOMContentLoaded", function () {
             modal.style.display = "none";
         }
     };
+
+    populateMeowgicsDropdowns().then(() => {
+        handleMeowgicsDropdowns();
+        preventDuplicateMeowgics();
+    });
+    populateTalentsDropdowns().then(preventDuplicateTalents);
+
+    const childhoodSelect = document.getElementById("childhood");
+    if (childhoodSelect) {
+        childhoodSelect.addEventListener("change", () => {
+            handleMeowgicsDropdowns();
+            preventDuplicateMeowgics();
+        });
+    }
 });
+
+function showMessageModal(message) {
+    const modal = document.getElementById("messageModal");
+    const msg = document.getElementById("modalMessage");
+    const closeBtn = document.querySelector("#messageModal .close-message");
+    msg.textContent = message;
+    modal.style.display = "block";
+    closeBtn.onclick = function () {
+        modal.style.display = "none";
+    };
+    window.onclick = function (event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+}

@@ -82,3 +82,19 @@ main {
 .btn-submit:hover {
     background-color: #ff9800;
 }
+
+#messageModal .modal-content {
+    max-width: 400px;
+    margin: 15% auto;
+    padding: 2em;
+    border-radius: 8px;
+    background: #fff;
+    text-align: center;
+}
+#messageModal .close-message {
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    font-size: 1.5em;
+    cursor: pointer;
+}

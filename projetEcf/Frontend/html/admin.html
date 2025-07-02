@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./style/style.css">
     <link rel="stylesheet" href="./style/admin.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -21,7 +23,7 @@
             <ul class="navLinks">
                 <li><a href="createCharacter.html">Création de personnage</a></li>
                 <li><a href="user.html">Mes créations</a></li>
-                <li><a href="admin.html">Administration</a></li>
+                <li><a href="admin.html">Grimoire</a></li>
             </ul>
         </nav>
     </header>
@@ -41,13 +43,22 @@
         </section>
         <section>
             <div class="content">
-                <h1>Administration</h1>
-                <p>Bienvenue dans la section d'administration. Sélectionnez une option dans le menu pour gérer les différentes catégories.</p>
+                <h1>Grimoire</h1>
+                <p>Bienvenue dans le grimoire. Ici, vous pouvez explorer les différentes catégories pour créer vos
+                    personnages.</p>
                 <img src="./illustration/livre.png" alt="un petit chat qui lit un livre" width="300" height="300">
             </div>
         </section>
     </main>
 
     <script src="./script.js"></script>
+
+    <div id="messageModal">
+        <div class="modal-content">
+            <span class="close-message">&times;</span>
+            <p id="modalMessage"></p>
+        </div>
+    </div>
 </body>
+
 </html>
