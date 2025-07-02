@@ -6,7 +6,7 @@ import { dirname } from 'path';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-const frontendDir = join(__dirname, 'html'); // Dossier racine pour les fichiers HTML
+const frontendDir = __dirname; // Dossier racine pour les fichiers HTML
 
 const mimeTypes = {
   '.html': 'text/html',
@@ -36,10 +36,14 @@ const serveStaticFile = async (filePath, res) => {
 };
 
 const server = http.createServer(async (req, res) => {
-  const pathname = req.url.split('?')[0]; // Récupérer le chemin sans les paramètres de requête
-  const filePath = join(frontendDir, pathname === '/' ? 'index.html' : pathname); // Par défaut, servir index.html pour "/"
-
-  await serveStaticFile(filePath, res);
+  let filePath = req.url;
+  if (filePath === '/' || filePath === '') {
+    filePath = '/html/index.html';
+  }
+  // Empêche les accès en dehors du dossier Frontend
+  filePath = filePath.split('?')[0].split('#')[0];
+  const fullPath = join(frontendDir, filePath);
+  await serveStaticFile(fullPath, res);
 });
 
 const PORT = 3000;

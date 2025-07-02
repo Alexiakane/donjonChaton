@@ -51,3 +51,12 @@ button:hover, .btn:hover {
     color: #a54b43;
     box-shadow: 0 2px 8px #e2c27555;
 }
+.character-name {
+    transition: color 0.18s, text-shadow 0.18s;
+    font-size: large;
+}
+
+li:hover .character-name {
+    color: #a54b43;
+    text-shadow: 0 1px 6px #e2c27588;
+}

@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connection</title>
-    <link rel="stylesheet" href="./style/style.css">
-    <link rel="stylesheet" href="./style/user.css">
+    <link rel="stylesheet" href="../style/style.css">
+    <link rel="stylesheet" href="../style/user.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -18,7 +18,7 @@
     <header>
         <nav>
             <div class="logo">
-                <img src="./illustration/logo.png" alt="Logo">
+                <img src="../illustration/logo.png" alt="Logo">
             </div>
             <ul class="navLinks">
                 <li><a href="index.html">Accueil</a></li>
@@ -31,15 +31,14 @@
     </header>
     <main>
         <section class="user-section">
-            <h1>Mes créations</h1>
+            <h1>Mes personnages</h1>
             <div class="user-content">
                 <div class="user-item">
-                    <h2>Personnages</h2>
                     <button type="button" onclick="listCharacters()" class="btn-action">Lister</button>
                     <button type="button" onclick="searchCharacter()" class="btn-action">Rechercher</button>
                     <button type="button" onclick="deleteCharacter()" class="btn-action">Supprimer</button>
                 </div>
-                <div id="characterList"></div>
+                <ul id="characterList"></ul>
             </div>
         </section>
         <section class="user-section">
@@ -47,7 +46,8 @@
             <button id="downloadSheetBtn" style="display:none;">Télécharger la fiche perso</button>
         </section>
     </main>
-    <script src="./script.js"></script>
+    <script src="../script/script.js"></script>
+    <script src="../script/user.js"></script>
 
     <div id="messageModal">
         <div class="modal-content">
