@@ -499,7 +499,7 @@ async function showFullCharacterById(characterId) {
     const data = await response.json();
     if (response.ok) {
         // Affiche les infos comme tu veux, par exemple dans une modale :
-        showMessageModal(JSON.stringify(data.character, null, 2));
+        showMessageModal(JSON.stringify(data.characterFull, null, 2));
         // Ou personnalise l'affichage selon tes besoins
     } else {
         showMessageModal("Erreur lors de la récupération du personnage.");
