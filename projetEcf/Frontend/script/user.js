@@ -30,11 +30,24 @@ async function listCharacters() {
             li.appendChild(span);
             li.style.cursor = "pointer";
             li.onclick = () => showFullCharacterById(character.id);
+
+            // Ajout de la poubelle
+            const trash = document.createElement("span");
+            trash.innerHTML = "🗑️";
+            trash.className = "delete-icon";
+            trash.title = "Supprimer";
+            trash.onclick = (e) => {
+                e.stopPropagation(); // Empêche le clic sur le nom
+                showDeleteModal(character.id, character.name);
+            };
+            li.appendChild(trash);
+
             characterList.appendChild(li);
         });
     } else {
         showMessageModal("Erreur lors de la récupération des personnages. Veuillez vous assurer que vous êtes connecté.");
     }
+
 }
 // Fonction pour rechercher un personnage
 async function searchCharacter() {
@@ -191,11 +204,7 @@ document.getElementById("downloadSheetBtn").onclick = function () {
 async function deleteCharacter(characterId) {
     const token = localStorage.getItem("token");
 
-    if (!confirm("Êtes-vous sûr de vouloir supprimer ce personnage ?")) {
-        return;
-    }
-
-    const response = await fetch(`http://localhost:4000/characters/${characterId}`, {
+    const response = await fetch(`http://localhost:4000/characterfull/${characterId}`, {
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -214,16 +223,42 @@ async function deleteCharacter(characterId) {
     }
 }
 
- populateMeowgicsDropdowns().then(() => {
+populateMeowgicsDropdowns().then(() => {
+    handleMeowgicsDropdowns();
+    preventDuplicateMeowgics();
+});
+populateTalentsDropdowns().then(preventDuplicateTalents);
+
+const childhoodSelect = document.getElementById("childhood");
+if (childhoodSelect) {
+    childhoodSelect.addEventListener("change", () => {
         handleMeowgicsDropdowns();
         preventDuplicateMeowgics();
     });
-    populateTalentsDropdowns().then(preventDuplicateTalents);
+}
 
-    const childhoodSelect = document.getElementById("childhood");
-    if (childhoodSelect) {
-        childhoodSelect.addEventListener("change", () => {
-            handleMeowgicsDropdowns();
-            preventDuplicateMeowgics();
-        });
-    }
+function showDeleteModal(characterId, characterName) {
+    const modal = document.getElementById("deleteModal");
+    const msg = document.getElementById("deleteModalMessage");
+    msg.textContent = `Voulez-vous supprimer le personnage "${characterName}" ?`;
+    modal.style.display = "block";
+
+    // Nettoie les anciens listeners
+    const confirmBtn = document.getElementById("confirmDeleteBtn");
+    const cancelBtn = document.getElementById("cancelDeleteBtn");
+    confirmBtn.onclick = () => {
+        modal.style.display = "none";
+        deleteCharacter(characterId);
+    };
+    cancelBtn.onclick = () => {
+        modal.style.display = "none";
+    };
+    document.querySelector(".close-delete").onclick = () => {
+        modal.style.display = "none";
+    };
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+}

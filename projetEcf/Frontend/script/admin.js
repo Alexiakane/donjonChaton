@@ -18,7 +18,6 @@ async function listMeowgics() {
 
         // Vider le tableau avant d'ajouter de nouvelles données
         modalTableBody.innerHTML = "";
-
         // Utilise le bon tableau selon la structure de la réponse
         const meowgics = Array.isArray(data) ? data : data.meowgics;
 
@@ -42,13 +41,11 @@ async function listMeowgics() {
         } else {
             modalTableBody.innerHTML = "<tr><td colspan='3'>Aucune donnée trouvée.</td></tr>";
         }
-
         // Afficher la boîte modale
         modal.style.display = "block";
     } else {
         showMessageModal("Erreur lors de la récupération des meowgics.");
     }
-
 };
 
 async function filterMeowgicsByQuality(quality) {
@@ -106,7 +103,6 @@ async function searchMeowgicById() {
         // ou pour autoriser la recherche par nom :
         || (m.name && m.name.toLowerCase().includes(searchValue.toLowerCase()))
     );
-
     // Affiche le résultat dans la modale
     const modalTableBody = document.getElementById("modalInfoTable").getElementsByTagName("tbody")[0];
     modalTableBody.innerHTML = "";
@@ -119,7 +115,6 @@ async function searchMeowgicById() {
         `;
         modalTableBody.appendChild(row);
     });
-
     // Ouvre la modale
     document.getElementById("infoModal").style.display = "block";
 };

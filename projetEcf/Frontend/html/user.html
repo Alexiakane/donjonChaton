@@ -32,11 +32,10 @@
     <main>
         <section class="user-section">
             <h1>Mes personnages</h1>
+            <img src="../illustration/img.png" height="250" width="400" alt="un petit groupe de chatons">
             <div class="user-content">
                 <div class="user-item">
                     <button type="button" onclick="listCharacters()" class="btn-action">Lister</button>
-                    <button type="button" onclick="searchCharacter()" class="btn-action">Rechercher</button>
-                    <button type="button" onclick="deleteCharacter()" class="btn-action">Supprimer</button>
                 </div>
                 <ul id="characterList"></ul>
             </div>
@@ -46,8 +45,6 @@
             <button id="downloadSheetBtn" style="display:none;">Télécharger la fiche perso</button>
         </section>
     </main>
-    <script src="../script/script.js"></script>
-    <script src="../script/user.js"></script>
 
     <div id="messageModal">
         <div class="modal-content">
@@ -55,6 +52,18 @@
             <p id="modalMessage"></p>
         </div>
     </div>
+    <div id="deleteModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close-delete">&times;</span>
+            <p id="deleteModalMessage"></p>
+            <button id="confirmDeleteBtn" class="btn-submit">Oui</button>
+            <button id="cancelDeleteBtn" class="btn-submit">Non</button>
+        </div>
+    </div>
+
+    <script src="../script/script.js"></script>
+    <script src="../script/user.js"></script>
+
 </body>
 
 </html>

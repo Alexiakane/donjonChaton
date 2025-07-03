@@ -5,17 +5,18 @@
     margin-top: 20px;
 }
 .user-content {
-    width: 80%;
-    max-width: 800px;
-    background-color: #fef8ec;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centre horizontalement */
+    max-width: 400px;    /* Réduit la largeur du container */
+    margin: 0 auto;      /* Centre le container dans la page */
 }
-.user-items {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+
+.user-item {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centre le bouton à l'intérieur */
+    margin-bottom: 1em;
 }
 
 #character-list {
@@ -59,4 +60,61 @@ button:hover, .btn:hover {
 li:hover .character-name {
     color: #a54b43;
     text-shadow: 0 1px 6px #e2c27588;
+}
+.delete-icon {
+    margin-left: 1em;
+    cursor: pointer;
+    color: #a54b43;
+    font-size: 1.2em;
+    vertical-align: middle;
+    transition: color 0.2s;
+}
+.delete-icon:hover {
+    color: #d32f2f;
+}
+/* Centrage et fond semi-transparent */
+.modal {
+    display: none; /* Par défaut cachée */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background: rgba(0,0,0,0.4); /* Fond sombre */
+    justify-content: center;
+    align-items: center;
+    /* Pour flex centré */
+    display: flex;
+}
+
+/* Boîte de la modale */
+.modal-content {
+    background-color: #fff8f2;
+    margin: auto;
+    padding: 2em 2.5em;
+    border: 2px solid #a54b43;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    min-width: 300px;
+    max-width: 400px;    /* <-- Réduit la largeur max */
+    width: 100%;         /* Prend toute la largeur dispo jusqu'à max-width */
+    text-align: center;
+    position: relative;
+}
+
+/* Bouton de fermeture */
+.close-delete, .close-message {
+    position: absolute;
+    top: 0.7em;
+    right: 1em;
+    color: #a54b43;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close-delete:hover, .close-message:hover {
+    color: #d32f2f;
 }
