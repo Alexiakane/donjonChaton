@@ -36,13 +36,13 @@ main {
     color: white;
 }
 .content {
-    margin: 2em auto;
-    max-width: 800px;
-    padding: 1.5em;
+    margin: 2.5em auto;
+    max-width: 600px;         /* Réduit la largeur pour un aspect plus compact */
+    padding: 2em 2.5em;       /* Plus d'espace intérieur */
     background-color: #fef8ec;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center; /* Centrage horizontal du contenu, y compris les boutons */
+    border-radius: 12px;      /* Arrondi plus doux */
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.10);
+    text-align: center;
 }
 
 .content button {
@@ -60,4 +60,7 @@ p {
     margin-bottom: 1em;
     color: #333;
     font-size: large;
+}
+section {
+    margin-bottom: 2.5em;
 }

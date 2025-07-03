@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestion des Qualités</title>
+    <title>Qualités</title>
     <link rel="stylesheet" href="../../style/style.css">
     <link rel="stylesheet" href="../../style/pagesAdmin.css">
 </head>
+
 <body>
     <header>
         <nav>
@@ -23,48 +25,45 @@
         </nav>
     </header>
     <main>
+        <h1 class="page-title">Les Qualités</h1>
         <section class="form-container">
-            <!-- Formulaire pour lister toutes les qualités -->
-            <div class="form-wrapper">
-                <form class="form">
-                    <h2>Lister toutes les Qualités</h2>
-                    <button type="button" onclick="" class="btn-submit">Lister</button>
+            <div>
+                <form>
+                    <p class="description">Un Chaton est Costaud, Malin et Mignon. Il est évident que certains Chatons sont parfois plus
+                        costauds que malins ou plus mignons que costauds - aucun Chaton n'est semblable à un autre.</p>
                 </form>
             </div>
-
-            <!-- Formulaire de recherche -->
-            <div class="form-wrapper">
-                <form class="form">
-                    <h2>Rechercher une Qualité</h2>
-                    <div class="form-group">
-                        <label for="search">Rechercher par Nom ou ID</label>
-                        <input type="text" id="search" name="search" placeholder="Nom ou ID de la qualité" required>
-                    </div>
-                    <button type="button" onclick="" class="btn-submit">Rechercher</button>
+            <div>
+                <form>
+                    <p class="description">Costaud, Malin et Mignon sont les trois qualités d'un Chaton. Elles sont définies par un score
+                        compris entre 1 et 5. Plus le score est élevé, plus le Chaton est doué. Un score de 1 indique
+                        qu'il n'est pas très bon du tout - et même qu'il est mauvais. Un score de 5 indique qu'il est
+                        l'un des meilleurs de la portée.</p>
                 </form>
             </div>
         </section>
-
         <section class="form-container">
-            <!-- Boîte modale -->
-            <div id="infoModal" class="modal">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h2>Liste des Qualités</h2>
-                    <table id="modalInfoTable">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nom</th>
-                                <th>Description</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Les données seront insérées ici dynamiquement -->
-                        </tbody>
-                    </table>
-                </div>
+            <img src="../../illustration/qualites.webp" alt="Chaton représentant les qualités" class="qualities-image">
+            <div>
+                <form>
+                    <h2>Costaud</h2>
+                    <p class="description">Costaud est la qualité des Chatons physiques et téméraires. Ils sont plus rapides, plus forts, plus agiles. Les Chatons possédant un score élévé dans cette qualité sont souvent un peu bourrins et tête-dure, mais aussi pleins de bravoure et d'abnégation.</p>
+                </form>
             </div>
+            <div>
+                <form>
+                    <h2>Malin</h2>
+                    <p class="description">Malin est la qualité des Chatons débrouillards et savants. Ils sont vigilants, concentrés inventifs et réfléchis. Ces Chatons-là semblent toujours savoir tout sur tout. C'est insupportable ! Mais ils ont des nerfs d'acier et trouvent des solutions à presque tous les problèmes</p>
+                </form>
+            </div>
+            <div>
+                <form>
+                    <h2>Mignon</h2>
+                    <p class="description">Mignon est la qualité des Chatons adorables et charmeurs. Ils sont subtils et attentifs, diplomates et rusés. Ils sont souvent sans vergogne, ronronnant et roulant des yeux pour séduire et convaincre, mais ce sont d'habiles négociateurs qui obtiennent ce qu'ils désirent.</p>
+                </form>
+            </div>
+        </section>
     </main>
 </body>
+
 </html>

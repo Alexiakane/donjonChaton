@@ -3,20 +3,28 @@ main {
     background-color: #fef8ec;
     color: #a54b43;
 }
-/* Conteneur principal pour les formulaires */
 .form-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 1.5em;
+    justify-content: center;   /* Centrer les formulaires */
+    gap: 2em;                  /* Plus d'espace entre les blocs */
     margin-bottom: 2em;
+    max-width: 1100px;         /* Largeur max pour éviter l'étalement */
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Wrapper pour chaque formulaire */
 .form-wrapper {
-    flex: 1 1 calc(50% - 2em); 
-    min-width: 300px; 
-}
+    flex: 1 1 350px;           /* Largeur mini plus grande, mais pas trop */
+    max-width: 420px;          /* Largeur max pour chaque formulaire */
+    min-width: 280px;
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: #fef8ec;
+    padding: 2em;
+    margin-bottom: 2em;        /* Espace entre les formulaires */
+}   
 /* Style général pour les formulaires */
 .form {
     background-color: #fef8ec;
@@ -78,11 +86,17 @@ main {
     background-color: #ff9800;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+    .form-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1.2em;
+    }
     .form-wrapper {
-        flex: 1 1 100%;
-}}
+        max-width: 98vw;
+        min-width: 0;
+    }
+}
 /* Style pour la boîte modale */
 .modal {
     display: none; /* Caché par défaut */
@@ -149,4 +163,20 @@ main {
 #modalInfoTable tr:hover {
     background-color: #ffe3c1;
     transition: background 0.2s;
+}
+.center-filter {
+    margin-left: auto;
+    margin-right: auto;
+}
+.page-title {
+    font-size: 2.5rem;
+    color: #a54b43;
+    margin-bottom: 1em;
+    text-align: center;
+}
+.description {
+    font-size: 1.2rem;
+    color: #555;
+    margin-bottom: 1em;
+    line-height: 1.6;
 }

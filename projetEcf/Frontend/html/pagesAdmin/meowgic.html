@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Miagies</title>
     <link rel="stylesheet" href="../../style/style.css">
     <link rel="stylesheet" href="../../style/pagesAdmin.css">
 </head>
@@ -30,46 +30,62 @@
             <div class="form-wrapper">
                 <form class="form">
                     <h2>Lister toutes les Miagies</h2>
-                    <button type= "button" onclick="listMeowgics()" id="listButton" class="btn-submit">Lister</button>
+                    <button type="button" onclick="listMeowgics()" id="listButton" class="btn-submit">Lister</button>
                 </form>
             </div>
-    
+
             <!-- Formulaire de recherche -->
             <div class="form-wrapper">
-                <form class="form">
+                <form class="form" id="searchMeowgicForm">
                     <h2>Rechercher une Miagie</h2>
                     <div class="form-group">
-                        <label for="search">Rechercher par Type ou ID</label>
-                        <input type="text" id="search" name="search" placeholder="Type ou ID de la Miagie" required>
+                        <label for="search">Rechercher par ID ou par nom</label>
+                        <input type="text" id="search" name="search" placeholder="ID ou nom de la Miagie" required>
                     </div>
-                    <button type="button" onclick="" class="btn-submit">Rechercher</button>
+                    <button type="button" onclick="searchMeowgicById()" class="btn-submit">Rechercher</button>
+                </form>
+            </div>
+
+            <!-- Formulaire pour filtrer les Miagies par type -->
+            <div class="form-wrapper center-filter">
+                <form class="form">
+                    <h2>Filtrer les Miagies par type</h2>
+                    <div class="btn-group">
+                        <button type="button" onclick="filterMeowgicsByQuality('Costaud')"
+                            class="btn-submit">Costaud</button>
+                        <button type="button" onclick="filterMeowgicsByQuality('Malin')"
+                            class="btn-submit">Malin</button>
+                        <button type="button" onclick="filterMeowgicsByQuality('Mignon')"
+                            class="btn-submit">Mignon</button>
+                    </div>
                 </form>
             </div>
         </section>
-    
+
         <section class="form-container">
-        
-      <!-- Boîte modale -->
-<div id="infoModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Liste des Meowgics</h2>
-        <table id="modalInfoTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Nom</th>
-                    <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Les données seront insérées ici -->
-            </tbody>
-        </table>
-    </div>
-</div>
+
+            <!-- Boîte modale -->
+            <div id="infoModal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h2>Liste des Meowgics</h2>
+                    <table id="modalInfoTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nom</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Les données seront insérées ici -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
     </main>
     <script src="../../script/script.js"></script>
+    <script src="../../script/admin.js"></script>
 
 </body>
 
