@@ -99,9 +99,14 @@ async function showFullCharacterById(characterId) {
     });
     const data = await response.json();
     if (response.ok) {
-        // Affiche les infos comme tu veux, par exemple dans une modale :
+
         generateFichePerso(data.characterFull);
-        // Ou personnalise l'affichage selon tes besoins
+        // Affiche un message si la fiche est consultée sur mobile
+        if (window.innerWidth <= 768) {
+            showMobileMessage();
+        } else {
+            document.getElementById("fichePersoMobileMsg").textContent = "";
+        }
     } else {
         showMessageModal("Erreur lors de la récupération du personnage.");
     }
@@ -114,7 +119,8 @@ function generateFichePerso(character) {
     const ctx = canvas.getContext("2d");
     const img = new Image();
     img.src = "/illustration/pagePerso.png";
-
+    // on attend que l'image soit chargée avant de la télécharger
+    document.getElementById("downloadSheetBtn").disabled = true;
     img.onload = async function () {
         await document.fonts.load("16px 'New Rocker'");
         // Efface le canvas
@@ -127,10 +133,10 @@ function generateFichePerso(character) {
         ctx.fillStyle = "#7c3f00"; // Couleur du texte
         ctx.textAlign = "left";
 
-        // Place chaque info à la bonne position (à ajuster selon ton modèle)
+        // Affiche les informations du personnage
         ctx.fillText(character.name, 168, 110); // Nom
-        ctx.fillText(character.heartPoints, 423, 327);
-        ctx.fillText(character.friendshipPoints, 525, 338);
+        ctx.fillText(character.heartPoints, 423, 327); // Points de vie
+        ctx.fillText(character.friendshipPoints, 525, 338); // Points d'amitié
         ctx.fillText(character.childhood.name, 172, 167); // Enfance
         ctx.fillText(character.trait.name, 178, 186); // Trait
         ctx.fillText(character.childhood.gift, 231, 206); // Don
@@ -141,10 +147,10 @@ function generateFichePerso(character) {
         ctx.fillText(costaud, 130, 332); // Costaud
         ctx.fillText(malin, 215, 332);   // Malin
         ctx.fillText(mignon, 305, 332);  // Mignon
-        // Affiche chaque sort sur une ligne, à partir d'une position de départ (exemple : x=1565, y=333)
+        // Affiche chaque sort sur une ligne, à partir d'une position de départ
         const startX = 624;
         let startY = 139;
-        const lineHeight = 30; // Espace entre chaque sort
+        const lineHeight = 30;
 
         character.meowgics.forEach(m => {
             ctx.fillText(m.name, startX, startY);
@@ -155,7 +161,7 @@ function generateFichePerso(character) {
             1: { x: 98, y: 454 }, // Talent 1
             2: { x: 98, y: 479 }, // Talent 2
             3: { x: 97, y: 505 }, // Talent 3
-            4: { x: 97, y: 530 },
+            4: { x: 97, y: 530 }, // etc...
             5: { x: 96, y: 555 },
             6: { x: 96, y: 580 },
             7: { x: 96, y: 605 },
@@ -188,9 +194,16 @@ function generateFichePerso(character) {
             }
         });
         canvas.dataset.characterName = character.name.replace(/[^a-z0-9]/gi, "_").toLowerCase();
+        document.getElementById("downloadSheetBtn").disabled = false;
         // Affiche le canvas et le bouton de téléchargement
-        canvas.style.display = "block";
-        document.getElementById("downloadSheetBtn").style.display = "inline-block";
+        if (window.innerWidth > 768) {
+            canvas.style.display = "block";
+            document.getElementById("downloadSheetBtn").style.display = "inline-block";
+        } else {
+            canvas.style.display = "none";
+            document.getElementById("downloadSheetBtn").style.display = "inline-block";
+        }
+
     };
 }
 document.getElementById("downloadSheetBtn").onclick = function () {
@@ -199,7 +212,10 @@ document.getElementById("downloadSheetBtn").onclick = function () {
     link.download = `fiche_${canvas.dataset.characterName || "perso"}.png`; link.href = canvas.toDataURL();
     link.click();
 };
-
+function showMobileMessage() {
+    const msgDiv = document.getElementById("fichePersoMobileMsg");
+    msgDiv.textContent = "La fiche graphique n'est pas affichée sur mobile, mais vous pouvez la télécharger.";
+}
 // Fonction pour supprimer un personnage
 async function deleteCharacter(characterId) {
     const token = localStorage.getItem("token");
@@ -256,7 +272,7 @@ function showDeleteModal(characterId, characterName) {
     document.querySelector(".close-delete").onclick = () => {
         modal.style.display = "none";
     };
-    window.onclick = function(event) {
+    window.onclick = function (event) {
         if (event.target === modal) {
             modal.style.display = "none";
         }

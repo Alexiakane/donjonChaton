@@ -13,14 +13,13 @@ PORT=4000
 TOKEN=1cPh4ZPlC3Sb2M5L6gBi8J7TttTFCFTGdEqhDIUde36ilB4hkCo07YrffxC0m23W677H432LzFWi9ZxA6CzZ
 
 Commandes disponibles :
-npm run create_database permet de créer la structure de la database
-npm run init_database permet d'alimenter des données principales de paramétrage
-npm run start_backend permet de lancer le serveur backend
-npm run start_frontend permet de lancer le serveur front
-npm test permet d'exécuter les tests unitaires
-npm run coverage permet de réaliser la couverture de tests
+npm run create_database => permet de créer la structure de la database
+npm run init_database => permet d'alimenter des données principales de paramétrage
+npm run start_backend => permet de lancer le serveur backend
+npm run start_frontend => permet de lancer le serveur front
+npm test => permet d'exécuter les tests unitaires
+npm run coverage => permet de réaliser la couverture de tests
 
-Structure du projet:(C'était la structure initial mais j'ai eu du mal avec le serveur coté front il arrivait pas a recup le css du coup j'ai tout mis dans le dossier html...)
 
 donjonChaton/
 
@@ -41,6 +40,4 @@ donjonChaton/
 ├── [package.json] # Dépendances et scripts
 ├── [README.md] # Documentation du projet
 
-Côté Front : La création d'utilisateur, la connexion et la création de personnages fonctionnent mais j'ai pas eu le temps de faire le reste...
-J'ai eu beaucoups de problème avec le CORS et mis beaucoups de temps à trouver la solution. 
-Côté Back : Tout fonctionne et il y a une collection Postman disponible dans le dossier tests.
+

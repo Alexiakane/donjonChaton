@@ -1,9 +1,3 @@
-
-
-
-
-
-
 document.addEventListener("DOMContentLoaded", function () {
     const modal = document.getElementById("infoModal");
     const span = document.querySelector("#infoModal .close");
@@ -18,7 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     };
 
-   
+
 });
 
 function showMessageModal(message) {
@@ -36,3 +30,12 @@ function showMessageModal(message) {
         }
     };
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const burgerBtn = document.getElementById("burgerBtn");
+    const navLinks = document.querySelector(".navLinks");
+    burgerBtn.addEventListener("click", () => {
+        navLinks.classList.toggle("active");
+        burgerBtn.classList.toggle("active");
+    });
+});

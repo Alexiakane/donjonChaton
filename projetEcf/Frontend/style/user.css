@@ -118,3 +118,27 @@ li:hover .character-name {
 .close-delete:hover, .close-message:hover {
     color: #d32f2f;
 }
+
+@media (max-width: 768px) {
+  #fichePersoCanvas {
+    display: none !important;
+  }
+  #downloadSheetBtn {
+    display: inline-block;
+  }
+  .fichePersoMobileMsg {
+    display: block;
+    color: #a54b43;
+    background: #fff8f2;
+    border-radius: 8px;
+    padding: 0.7em 1em;
+    margin: 1em 0;
+    text-align: center;
+    font-size: 1em;
+  }
+}
+@media (min-width: 769px) {
+  .fichePersoMobileMsg {
+    display: none;
+  }
+}

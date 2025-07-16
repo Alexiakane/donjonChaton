@@ -103,3 +103,22 @@ main {
 .btn-submit:hover {
     background-color: #ff9800;
 }
+
+@media (max-width: 600px) {
+  .quality-group {
+    flex-direction: column;
+    gap: 0.5em;
+    align-items: stretch;
+  }
+  .quality-group label {
+    min-width: unset;
+    font-size: 1em;
+  }
+  .quality-group input[type="number"] {
+    width: 25%;
+    font-size: 1.1em;
+  }
+  .form-group {
+    padding: 0.5em 0;
+  }
+}
